@@ -1,0 +1,236 @@
+html {
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+body, h2, h1, h3, h4, p, a, img, div, textarea, input, ul, li, i, span, footer, header,select,button{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family:"Microsoft YaHei",Arial,Tahoma, Helvetica;
+  background: #f2f2f2!important;
+  color: #333;
+  font-size: 12px;
+}
+#vueg-background{background: none!important;}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+i, em {
+  font-style: normal;
+}
+
+h2, h1, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+ul, li {
+  list-style: none;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], button {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+textarea, input, select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border-color: transparent;
+}
+button{border: none;}
+a, button, input, textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/*清除浮动*/
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+.white{height:100%;background: #fff;}
+.bottom-distance{
+  padding-bottom: 60px;
+}
+.text-red{color: #E72222;}
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.yd-cityselect-title {font-size: 14px!important;}
+
+/*登录*/
+.login-banner{
+  width: 100%;
+  height: 27.9vh;
+  max-height: 206px;
+  text-align: center;
+  background: url("../images/banner_agent.png") no-repeat left top;
+  background-size: 100% 100%;
+}
+.login-banner img{
+  width: 128px;
+  margin-top: 25px;
+}
+.login-wrap{padding-bottom:1px;}
+.login-box{margin: -42px 20px 20px;}
+.login-form .login-list{
+  border-radius: 5px 5px;
+  -webkit-border-radius: 5px 5px;
+  box-shadow:0 0 15px rgba(153,153,153,.3);
+  background: #fff;
+}
+.login-list li{
+  padding: 16px 0;
+  margin: 0 24px;
+  display: flex;
+  align-items: center;
+}
+.login-list li:not(:last-child){border-bottom: 1px solid #eee;}
+.login-list .yd-input-password:after{font-size: 20px;}
+.login-list .icon {
+  margin-right: 10px;
+  width: 19px;
+  vertical-align: middle;
+}
+.login-list li input,.login-list li input::-webkit-input-placeholder{
+  font-size: 14px;
+  color: #999;
+  font-family:"Microsoft YaHei",Arial;
+}
+.login-list .right{
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+.login-list .right .code{width: 140px;}
+.login-list .send-btn,.login-list .send-btn:active{
+  background: transparent;
+  color: #37A6F5;
+  font-size: 14px;
+  padding: 0;
+  height: 23px;
+}
+.login-list .send-btn.yd-btn-disabled{
+  color: #999;
+}
+.login-btn{
+  background: #37A6F5;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin-top: 25px;
+  display: block;
+  width: 100%;
+  z-index: 3;
+}
+.sign-btn{
+  background: transparent;
+  border:1px solid #37A6F5;
+  color:#37A6F5;
+  margin-top: 15px;
+}
+
+/*首页*/
+
+/*APP下载*/
+.page-about{
+  padding-top: 45px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/*我的*/
+.designer-model .yd-popup-content{
+  background: #fff;
+  height: 100%;
+}
+.designer-model .yd-popup-content .input-wrap{padding:30px 12px 0;}
+.designer-model .yd-popup-content .input-text{
+  height: 40px;
+  border: 1px solid #eee;
+  padding: 5px 10px;
+}
+.my-list .yd-cell:after,.my-work-list .yd-cell:after{border-bottom: 0;}
+.my-list .yd-cell-box,.my-work-list .yd-cell-box{margin-bottom: 0;}
+.my-list .yd-cell-right,.my-work-list .yd-cell-right{font-size: 14px;color: #999;}
+.my-work-list{padding-bottom: 20px;}
+.my-work-list .name{
+  font-size: 14px;
+  color: #333;
+}
+.my-work-list .yd-cell-right input[type=text]{
+  text-align: right;
+  font-size: 14px;
+  color: #999;
+}
+.my-work-list .yd-cell-right select{
+  text-align: right;
+  font-size: 14px;
+  color: #999;
+}
+.my-work-btns{padding: 10px 12px;text-align: center;}
+.my-work-btns button{
+  background: #37A6F5;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.my-work-btns .cancel-btn{
+  color: #333;
+  background: #e5e5e5;
+  border: 1px solid #d2d2d2;
+}
+
+/*订单*/
+.van-tabs .van-tabs__nav-bar, .van-tabs__nav .van-tabs__line {
+  background-color: #37A6F5!important;
+}
+.van-tab span {
+  color: #666;
+  font-size: 13px;
+}
+.order-content .van-tabs__wrap--scrollable .van-tab {flex: 0 0 24%;}
+.van-tab--active span {
+  color: #333;
+  font-weight: bold;
+}
+.order-tabs .van-tabs__line,.order-tabs .van-tab:active{ background-color: transparent!important;}
+.order-tabs .van-tab span {
+  color: #999;
+  display: inline-block;
+  font-size: 14px;
+}
+.order-tabs .van-tab--active span {
+  height: 42px;
+  line-height: 42px;
+  border-bottom: 2px solid #333;
+  color: #333;
+  font-weight: bold;
+}
+.order-tabs .van-hairline--top-bottom::after{border-width:0;}
+
