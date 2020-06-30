@@ -3,12 +3,13 @@ import Money from '@/views/my/Money'
 import My from '@/views/my/Index'
 import Integral from '@/views/my/Integral'
 import Withdrawal from '@/views/my/Withdrawal'
+import MoneyRecord from '@/views/my/MoneyRecord'
 import MyPassword from '@/views/my/Password'
 
 
 export default [
   {
-    path: '/money',
+    path: '/my/money',
     name: 'Money',
     component: Money,
     meta: {
@@ -37,6 +38,14 @@ export default [
     component: Integral,
     meta: {
       title: '积分兑换'
+    }
+  },
+  {
+    path: '/my/moneyRecord',
+    name: 'MoneyRecord',
+    component: MoneyRecord,
+    meta: {
+      title: '充值记录'
     }
   },
   {

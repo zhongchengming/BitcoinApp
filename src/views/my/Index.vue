@@ -37,75 +37,20 @@
     </ul>
     <div class="my-list">
       <ul>
-        <li>
-          <i class="icon iconfont iconemaxcitygerenxinxitubiaoji03" style="color:#62c6f5"></i>
-          <h3 class="name">智投鼠投注记录</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li @click="goIntegral">
-          <i class="icon iconfont icongoumai" style="color: #c6b909;"></i>
-          <h3 class="name">积分兑换</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconchongzhijilu" style="color: #65bb71;"></i>
-          <h3 class="name">充值</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li @click="goWithdrawal">
-          <i class="icon iconfont icontixian1" style="color: #ff7c81;"></i>
-          <h3 class="name">提现</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconcaozuorizhi" style="color: #ffa640;"></i>
-          <h3 class="name">日志查看</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconcaozuorizhi" style="color: #ffa640;"></i>
-          <h3 class="name">充值记录</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconcaozuorizhi" style="color: #ffa640;"></i>
-          <h3 class="name">提现记录</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconhuokefenxiang" style="color: #fa0795;"></i>
-          <h3 class="name">好友分享</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconwoderenwu" style="color: #1ec026;"></i>
-          <h3 class="name">我的任务</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconmima" style="color: #24a7ff;"></i>
-          <h3 class="name">登录密码</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconmima" style="color: #24a7ff;"></i>
-          <h3 class="name">提现密码</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont icongoumai" style="color: #c6b909;"></i>
-          <h3 class="name">我的积分</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
-        <li>
-          <i class="icon iconfont iconyinxingqia" style="color: #24a7ff;;"></i>
-          <h3 class="name">银行管理</h3>
-          <i class="icon iconfont iconiconfontjiantou5"></i>
-        </li>
+        <router-link v-for="(item,index) in lists" :to="item.url" :key="index">
+          <li>
+            <i class="icon iconfont" :class="item.icon" :style="{color:item.iconLeftColor}" ></i>
+            <h3 class="name">{{item.name}}</h3>
+            <i class="icon iconfont iconiconfontjiantou5"></i>
+          </li>
+        </router-link>
       </ul>
     </div>
     <div class="logout-btn">
        <button  @click="logout()">退出登录</button>
+    </div>
+    <div class="slogon-footer">
+      <img src="@/assets/images/slogon_blue.png">
     </div>
     <yd-tabbar fixed active-color="#56b3f6">
       <yd-tabbar-item title="首页" link="/">
@@ -128,7 +73,86 @@
     name: "index",
     data() {
       return {
-        titleModel:false,
+          lists:[
+              {
+                  url:'' ,
+                  iconLeftColor:'#62c6f5',
+                  name:'智投鼠投注记录',
+                  icon:'iconemaxcitygerenxinxitubiaoji03'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#c6b909',
+                  name:'积分兑换',
+                  icon:'icongoumai'
+              },
+              {
+                  url:'/my/money' ,
+                  iconLeftColor:'#65bb71',
+                  name:'充值',
+                  icon:'iconchongzhijilu'
+              },
+              {
+                  url:'/my/withdrawal' ,
+                  iconLeftColor:'#ff7c81',
+                  name:'提现',
+                  icon:'icontixian1'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#ffa640',
+                  name:'日志查看',
+                  icon:'iconcaozuorizhi'
+              },
+              {
+                  url:'/my/moneyRecord' ,
+                  iconLeftColor:'#ffa640',
+                  name:'充值记录',
+                  icon:'iconcaozuorizhi'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#ffa640',
+                  name:'提现记录',
+                  icon:'iconcaozuorizhi'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#fa0795',
+                  name:'好友分享',
+                  icon:'iconhuokefenxiang'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#1ec026',
+                  name:'我的任务',
+                  icon:'iconwoderenwu'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#24a7ff',
+                  name:'登录密码',
+                  icon:'iconmima'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#c6b909',
+                  name:'提现密码',
+                  icon:'iconmima'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#c6b909',
+                  name:'我的积分',
+                  icon:'icongoumai'
+              },
+              {
+                  url:'/my/integral' ,
+                  iconLeftColor:'#24a7ff',
+                  name:'银行管理',
+                  icon:'iconyinxingqia'
+              }
+          ],
         agent: {
           agentName: '',
           company: '',
@@ -157,15 +181,6 @@
     methods:{
       logout(){
         this.$router.push('/login')
-      },
-      goIntegral(){
-        this.$router.push('/my/integral')
-      },
-      goWithdrawal(){
-        this.$router.push('/my/withdrawal')
-      },
-      goPassword(){
-        this.$router.push('/forgot/password')
       },
       load() {
         api.my.get().then(response => {
@@ -244,17 +259,16 @@
   .my-list li .icon{font-size: 20px;}
   .my-list li .iconiconfontjiantou5{font-size: 16px;color: #999;}
   .logout-btn{
-    padding: 15px 10px 25px;
+    padding: 15px 10px 5px;
   }
   .logout-btn button{
     color: #24a7ff;
     display: inline-block;
     width: 100%;
-    border: .026667rem solid #24a7ff;
-    background-color: transparent;
+    border: 1px solid #24a7ff;
     padding: 12px 0;
-    font-size: 14px;
-    border-radius: 4px;
+    font-size: 16px;
+    border-radius: 6px;
   }
 
 </style>

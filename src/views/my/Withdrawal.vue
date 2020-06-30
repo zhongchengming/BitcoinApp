@@ -1,6 +1,6 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="提现" fixed bgcolor="rgba(0,0,0,.8)" height="45px" color="#fff" fontsize="15px">
+    <yd-navbar title="提现" fixed>
       <router-link to="/my" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
@@ -19,11 +19,11 @@
           <yd-input v-model="query.account" placeholder="请输入真实姓名"></yd-input>
         </li>
         <li>
-          <i class="icon iconfont iconwode"></i>
+          <i class="icon iconfont iconyinxingqia"></i>
           <yd-input v-model="query.money" placeholder="请输入银行卡号"></yd-input>
         </li>
         <li>
-          <i class="icon iconfont iconwode"></i>
+          <i class="icon iconfont iconyinxingqia"></i>
           <yd-input v-model="query.money" placeholder="请输入银行名称"></yd-input>
         </li>
         <li>
@@ -36,7 +36,7 @@
         </li>
       </ul>
       <p class="tips">提现时间中午12点-晚上12点</p>
-      <button class="btn">确认兑换</button>
+      <button class="btn">提交申请</button>
     </div>
   </div>
 </template>

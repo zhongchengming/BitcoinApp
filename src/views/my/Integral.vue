@@ -1,6 +1,6 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="积分兑换" fixed bgcolor="rgba(0,0,0,.8)" height="45px" color="#fff" fontsize="15px">
+    <yd-navbar title="积分兑换" fixed>
       <router-link to="/my" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
@@ -15,11 +15,11 @@
     <div class="my-form-box">
       <ul class="my-form-list">
         <li>
-          <i class="icon iconfont iconjifenduihuan"></i>
+          <i class="icon iconfont icongoumai"></i>
           <yd-input v-model="query.account" placeholder="请输入积分"></yd-input>
         </li>
         <li>
-          <i class="icon iconfont icongoumai"></i>
+          <i class="icon iconfont iconchongzhijilu"></i>
           <yd-input v-model="query.money" placeholder="请输入金额"></yd-input>
         </li>
       </ul>

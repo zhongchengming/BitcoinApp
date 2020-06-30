@@ -22,8 +22,8 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     next()
-    /*let valid = store.state.principal.isValid()
-    console.log('valid',valid)
+    let valid = store.state.principal.isValid()
+    /*console.log('valid',valid)
     if (!valid) {
       //记住要跳转的路径
       router.push({path:'/login',query:{lastPath:to.fullPath}})

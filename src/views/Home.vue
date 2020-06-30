@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-distance">
+  <div class="page-home">
     <div class="header">
       <div class="logo">
         <img  src="@/assets/images/logo.png"/>
@@ -193,7 +193,6 @@
     padding-bottom:60px;
   }
   .page-home .header{
-   /* background: #56b3f6;*/
     background: rgba(0,0,0,.8);
     padding: 1.2rem .5rem;
     display: flex;

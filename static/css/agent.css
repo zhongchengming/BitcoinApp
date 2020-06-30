@@ -14,7 +14,6 @@ body {
   color: #333;
   font-size: 12px;
 }
-#vueg-background{background: none!important;}
 
 a {
   text-decoration: none;
@@ -67,6 +66,19 @@ a, button, input, textarea {
 }
 .page-about .yd-navbar:after{
   border-bottom: none;
+}
+.page-about .yd-navbar{
+  background:rgba(0,0,0,.8)!important;
+  height: 45px!important;
+  font-size: 15px;
+}
+.page-about .yd-navbar-center-box{
+  height: 45px!important;
+  color: #fff;
+}
+.page-about .yd-navbar-center-box .yd-navbar-center-title{
+  font-size: 15px!important;
+  color: #fff!important;
 }
 
 /*登录*/
@@ -153,6 +165,11 @@ a, button, input, textarea {
   height: 100%;
   box-sizing: border-box;
 }
+.slogon-footer {
+  text-align: center;
+  padding: 30px 0 20px;
+}
+.slogon-footer img{width: 60%;}
 
 /*我的*/
 
@@ -182,6 +199,7 @@ a, button, input, textarea {
 .integral-top .total .duihuan{font-size: 16px;}
 .my-form-box{margin: -42px 20px 20px;}
 .my-form-box .my-form-list{
+  padding: 25px 10px 40px;
   border-radius: 5px 5px;
   -webkit-border-radius: 5px 5px;
   box-shadow:0 0 15px rgba(153,153,153,.3);
@@ -194,14 +212,14 @@ a, button, input, textarea {
   align-items: center;
   color: #333;
   font-size: 14px;
+  border-bottom: 1px solid #eee;
 }
-.my-form-list li:not(:last-child){border-bottom: 1px solid #eee;}
 .my-form-list .icon {
-  width: 38px;
+  width: 40px;
   vertical-align: middle;
   font-size: 20px;
   display: inline-block;
-  text-align: center;
+  text-align: left;
   color: #ffa640;
 }
 .my-form-list li input,.login-list li input::-webkit-input-placeholder{
@@ -222,11 +240,12 @@ a, button, input, textarea {
   font-size: 15px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
-  margin-top: 25px;
+  margin-top: 35px;
   display: block;
   width: 100%;
   border:1px solid #37A6F5;
   border-bottom: 2px solid #37A6F5;
   color:#37A6F5;
 }
+
 

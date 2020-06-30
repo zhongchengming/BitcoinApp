@@ -1,6 +1,6 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="APP下载" fixed bgcolor="rgba(0,0,0,.8)" height="45px" color="#fff" fontsize="15px">
+    <yd-navbar title="APP下载" fixed>
       <router-link to="/" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
@@ -21,7 +21,7 @@
           </div>
         </div>
       </main>
-      <div  class="slogon-footer">
+      <div  class="slogon-footer" style="margin-top: 40px;">
         <img src="@/assets/images/slogon_blue.png">
       </div>
     </div>
@@ -59,9 +59,4 @@
     justify-content: center;
   }
   .app-link-item .icon{margin-right: 7px;}
-  .slogon-footer {
-    text-align: center;
-    margin-top: 60px;
-  }
-  .slogon-footer img{width: 60%;}
 </style>

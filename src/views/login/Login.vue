@@ -12,23 +12,18 @@
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_password.png"/>
-            <yd-input type="password" v-model="query.oldPassword" placeholder="请输入密码"></yd-input>
+            <yd-input type="password" v-model="query.password" placeholder="请输入密码"></yd-input>
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_code.png"/>
             <div class="right">
               <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
-              <div class="code-wrap" @click="changeCode">
+              <!--<div class="code-wrap" @click="changeCode">
                 <img :src="imgCode" style="width:84px"/>
+              </div>-->
+              <div @click="changeCode()">
+                <identify :identifyCode="identifyCode"></identify>
               </div>
-              <!-- <yd-sendcode class="send-btn" v-model="sendCode"
-                            @click.native="sendCode1"
-                            init-str="获取验证码"
-                            second="60"
-                            run-str="重新发送({%s})"
-                            reset-str="重新发送"
-                            type="warning">
-               </yd-sendcode>-->
             </div>
           </li>
         </ul>
@@ -42,21 +37,52 @@
 <script>
   import api from '@/api'
   import md5 from 'md5'
+  import identify from "@/components/identify"
+
 
   export default {
     name: "login",
+      components: {
+          identify
+      },
     data() {
       return {
-        imgCode:'/static/images/code_img.png',
+        //imgCode:'/static/images/code_img.png',
         query: {
           account: '',
-          oldPassword:'',
+          password:'',
           code: ''
         },
+          // 验证码初始值
+          identifyCode: 'm6a8',
+          // 验证码的随机取值范围
+          identifyCodes: '123456789abcdefghjkmnpqrstuvwxyz',
       }
     },
+      mounted() {
+          // 刷新页面就生成随机验证码
+          this.identifyCode = ''
+          this.makeCode(this.identifyCodes, 4)
+
+      },
     methods: {
-      sendCode1() {
+        // 点击验证码刷新验证码
+        changeCode() {
+            this.identifyCode = ''
+            this.makeCode(this.identifyCodes, 4)
+        },
+        // 生成一个随机整数  randomNum(0, 10) 0 到 10 的随机整数， 包含 0 和 10
+        randomNum(min, max) {
+            max = max + 1
+            return Math.floor(Math.random() * (max - min) + min)
+        },
+        // 随机生成验证码字符串
+        makeCode(data, len) {
+            for (let i = 0; i < len; i++) {
+                this.identifyCode += data[this.randomNum(0, data.length - 1)]
+            }
+        },
+     /* sendCode1() {
         if(!this.query.mobilePhone){
           this.$dialog.toast({
             mes:'请输入手机号'
@@ -70,28 +96,40 @@
           return
         }
         this.$dialog.loading.open('发送中...');
-        setTimeout(() => {
-          api.account.loginCode(this.query.mobilePhone).then(response => {
-            if (response.code == 200) {
-              this.sendCode = true;
-              this.$dialog.loading.close();
-
-              this.$dialog.toast({
-                mes: '已发送',
-                icon: 'success',
-                timeout: 1500
-              });
-            } else {
-              this.$dialog.loading.close();
-            }
-          })
-        }, 1000);
+      },*/
+    /*
+    if (this.identifyCode != this.phone.code ) {
+          this.$toast("验证码不正确");
+          this.changeCode();// 改变验证码
+        } else {
+          this.$toast("验证码正确");
+         }
       },
-      changeCode(){
-        var num=Math.ceil(Math.random()*10);//生成一个随机数（防止缓存）
-        this.imgCode = "url?" + num;
-      },
+    * */
       login() {
+          if(!this.query.account){
+              this.$dialog.toast({
+                  mes:'请输入用户名/手机号'
+              })
+              return
+          }
+          if(!this.query.password){
+              this.$dialog.toast({
+                  mes:'请输入密码'
+              })
+              return
+          }
+          if(!this.query.code){
+              this.$dialog.toast({
+                  mes:'请输入验证码'
+              })
+              return
+          }
+          if (this.identifyCode != this.query.code ) {
+              this.$toast("验证码不正确");
+              this.changeCode();// 改变验证码
+              return
+          }
         this.$dialog.loading.open('加载中...');
         this.$router.push('/')
         this.$dialog.loading.close()

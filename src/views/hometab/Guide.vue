@@ -1,6 +1,6 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="新手指导" fixed bgcolor="rgba(0,0,0,.8)" height="45px" color="#fff" fontsize="15px">
+    <yd-navbar title="新手指导" fixed>
       <router-link to="/" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
@@ -79,9 +79,4 @@
     box-sizing: border-box;
   }
   .about-info .article .box img{width: 100%;}
-  .slogon-footer {
-    text-align: center;
-    padding: .8rem 0;
-  }
-  .slogon-footer img{width: 60%;}
 </style>
