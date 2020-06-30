@@ -35,9 +35,6 @@
 </script>
 
 <style scoped>
-  .page-about .yd-navbar:after{
-    border-bottom: none;
-  }
   .download-page {
     height: 100%;
     background: url(/static/images/download_bg.png) no-repeat;

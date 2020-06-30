@@ -3,47 +3,45 @@
     <div class="login-banner">
       <img src="@/assets/images/logo.png"/>
     </div>
-    <div class="login-wrap">
-      <div class="login-box">
-        <div class="login-form">
-          <ul class="login-list">
-            <li>
-              <img class="icon" src="@/assets/images/icon_user.png"/>
-              <yd-input type="text" v-model="query.username" placeholder="请输入用户名"></yd-input>
-            </li>
-            <li>
-              <img class="icon" src="@/assets/images/icon_password.png"/>
-              <yd-input type="password" v-model="query.oldPassword" placeholder="请输入密码"></yd-input>
-            </li>
-            <li>
-              <img class="icon" src="@/assets/images/icon_password.png"/>
-              <yd-input type="password" v-model="query.oldPasswordConfirm" placeholder="请输入确认密码"></yd-input>
-            </li>
-            <li>
-              <img class="icon" src="@/assets/images/icon_code.png"/>
-              <yd-input type="text" v-model="query.yqcode" placeholder="请输入邀请码"></yd-input>
-            </li>
-            <li>
-              <img class="icon" src="@/assets/images/icon_code.png"/>
-              <div class="right">
-                <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
-                <div class="code-wrap" @click="changeCode">
-                  <img :src="imgCode" style="width:84px"/>
-                 </div>
-                <!--<yd-sendcode class="send-btn" v-model="sendCode"
-                             @click.native="sendCode1"
-                             init-str="获取验证码"
-                             second="60"
-                             run-str="重新发送({%s})"
-                             reset-str="重新发送"
-                             type="warning">
-                </yd-sendcode>-->
+    <div class="login-box">
+      <div class="login-form">
+        <ul class="login-list">
+          <li>
+            <img class="icon" src="@/assets/images/icon_user.png"/>
+            <yd-input type="text" v-model="query.username" placeholder="请输入用户名"></yd-input>
+          </li>
+          <li>
+            <img class="icon" src="@/assets/images/icon_password.png"/>
+            <yd-input type="password" v-model="query.oldPassword" placeholder="请输入密码"></yd-input>
+          </li>
+          <li>
+            <img class="icon" src="@/assets/images/icon_password.png"/>
+            <yd-input type="password" v-model="query.oldPasswordConfirm" placeholder="请输入确认密码"></yd-input>
+          </li>
+          <li>
+            <img class="icon" src="@/assets/images/icon_code.png"/>
+            <yd-input type="text" v-model="query.yqcode" placeholder="请输入邀请码"></yd-input>
+          </li>
+          <li>
+            <img class="icon" src="@/assets/images/icon_code.png"/>
+            <div class="right">
+              <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
+              <div class="code-wrap" @click="changeCode">
+                <img :src="imgCode" style="width:84px"/>
               </div>
-            </li>
-          </ul>
-          <button class="login-btn" @click="gosign()">立即注册</button>
-          <button class="login-btn sign-btn" @click="gologin()">我已有账号 马上登录</button>
-        </div>
+              <!--<yd-sendcode class="send-btn" v-model="sendCode"
+                           @click.native="sendCode1"
+                           init-str="获取验证码"
+                           second="60"
+                           run-str="重新发送({%s})"
+                           reset-str="重新发送"
+                           type="warning">
+              </yd-sendcode>-->
+            </div>
+          </li>
+        </ul>
+        <button class="login-btn" @click="gosign()">立即注册</button>
+        <button class="login-btn sign-btn" @click="gologin()">我已有账号 马上登录</button>
       </div>
     </div>
   </div>

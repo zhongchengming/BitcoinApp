@@ -1,5 +1,5 @@
 <template>
-  <div class="page-home">
+  <div class="bottom-distance">
     <div class="header">
       <div class="logo">
         <img  src="@/assets/images/logo.png"/>

@@ -6,6 +6,20 @@
   "description": "钟成明合作的h5",
   "glyphs": [
     {
+      "icon_id": "584251",
+      "name": "右箭头",
+      "font_class": "iconfontjiantou5",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "12097774",
+      "name": "右箭头",
+      "font_class": "youjiantou",
+      "unicode": "e68c",
+      "unicode_decimal": 59020
+    },
+    {
       "icon_id": "457370",
       "name": "order",
       "font_class": "emaxcitygerenxinxitubiaoji03",
