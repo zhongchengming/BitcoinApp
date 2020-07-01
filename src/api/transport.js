@@ -7,7 +7,8 @@ import app from '../main'
 console.log(process)
 if (process.env) {
   console.log(process.env)
-  axios.defaults.baseURL = `${process.env.baseURL}api/`
+  /*axios.defaults.baseURL = `${process.env.baseURL}api/`*/
+  axios.defaults.baseURL = `${process.env.baseURL}`
 } else {
   axios.defaults.baseURL = '/api/'
 }

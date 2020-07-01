@@ -81,7 +81,7 @@
                   icon:'iconemaxcitygerenxinxitubiaoji03'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/integralExchange' ,
                   iconLeftColor:'#c6b909',
                   name:'积分兑换',
                   icon:'icongoumai'
@@ -98,12 +98,12 @@
                   name:'提现',
                   icon:'icontixian1'
               },
-              {
+              /*{
                   url:'/my/integral' ,
                   iconLeftColor:'#ffa640',
                   name:'日志查看',
                   icon:'iconcaozuorizhi'
-              },
+              },*/
               {
                   url:'/my/moneyRecord' ,
                   iconLeftColor:'#ffa640',
@@ -111,31 +111,31 @@
                   icon:'iconcaozuorizhi'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/withdrawalRecord' ,
                   iconLeftColor:'#ffa640',
                   name:'提现记录',
                   icon:'iconcaozuorizhi'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/share' ,
                   iconLeftColor:'#fa0795',
                   name:'好友分享',
                   icon:'iconhuokefenxiang'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/task' ,
                   iconLeftColor:'#1ec026',
                   name:'我的任务',
                   icon:'iconwoderenwu'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/loginPassword' ,
                   iconLeftColor:'#24a7ff',
                   name:'登录密码',
                   icon:'iconmima'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/withdrawalPassword' ,
                   iconLeftColor:'#c6b909',
                   name:'提现密码',
                   icon:'iconmima'
@@ -147,9 +147,9 @@
                   icon:'icongoumai'
               },
               {
-                  url:'/my/integral' ,
+                  url:'/my/bankMgt' ,
                   iconLeftColor:'#24a7ff',
-                  name:'银行管理',
+                  name:'银行卡管理',
                   icon:'iconyinxingqia'
               }
           ],

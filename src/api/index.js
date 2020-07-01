@@ -1,3 +1,4 @@
+/*
 import account from './login'
 import my from './my'
 import reporte from './reporte'
@@ -13,3 +14,4 @@ export default {
   integral:integral,
   activeOrder:order
 }
+*/

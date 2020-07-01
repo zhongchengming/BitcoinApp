@@ -6,8 +6,6 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     /*proxyTable: [{
@@ -15,6 +13,12 @@ module.exports = {
       changeOrigin: true,
       target: 'http://192.168.1.233:8575'
     }],*/
+    proxyTable: [{
+      '/':{
+        changeOrigin: true,
+        target: 'http://121.196.122.191:8080/appVersionManageAt'
+      }
+    }],
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8084, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined

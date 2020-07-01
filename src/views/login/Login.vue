@@ -17,11 +17,8 @@
           <li>
             <img class="icon" src="@/assets/images/icon_code.png"/>
             <div class="right">
-              <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
-              <!--<div class="code-wrap" @click="changeCode">
-                <img :src="imgCode" style="width:84px"/>
-              </div>-->
-              <div @click="changeCode()">
+              <yd-input type="text" v-model="query.code" placeholder="请输入验证码"></yd-input>
+              <div class="code-wrap" @click="changeCode()">
                 <identify :identifyCode="identifyCode"></identify>
               </div>
             </div>
@@ -38,6 +35,7 @@
   import api from '@/api'
   import md5 from 'md5'
   import identify from "@/components/identify"
+  import {login} from '@/api/login'
 
 
   export default {
@@ -63,7 +61,6 @@
           // 刷新页面就生成随机验证码
           this.identifyCode = ''
           this.makeCode(this.identifyCodes, 4)
-
       },
     methods: {
         // 点击验证码刷新验证码
@@ -82,30 +79,6 @@
                 this.identifyCode += data[this.randomNum(0, data.length - 1)]
             }
         },
-     /* sendCode1() {
-        if(!this.query.mobilePhone){
-          this.$dialog.toast({
-            mes:'请输入手机号'
-          })
-          return
-        }
-        if(!/^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(this.query.mobilePhone)){
-          this.$dialog.toast({
-            mes:'手机号格式不正确'
-          })
-          return
-        }
-        this.$dialog.loading.open('发送中...');
-      },*/
-    /*
-    if (this.identifyCode != this.phone.code ) {
-          this.$toast("验证码不正确");
-          this.changeCode();// 改变验证码
-        } else {
-          this.$toast("验证码正确");
-         }
-      },
-    * */
       login() {
           if(!this.query.account){
               this.$dialog.toast({
@@ -131,9 +104,20 @@
               return
           }
         this.$dialog.loading.open('加载中...');
-        this.$router.push('/')
-        this.$dialog.loading.close()
-        /*if (this.sendCode == false) {
+        //this.$router.push('/')
+        //this.$dialog.loading.close()
+        login(this.query).then(response => {
+          this.$dialog.loading.close()
+          if(response.code==200){
+            this.$store.dispatch('addPrincipal', response.data).then(() => {
+              this.$router.push('/')
+            })
+          }
+        },()=>{
+          this.$dialog.loading.close()
+        })
+
+       /* if (this.sendCode == false) {
           this.account.password = md5(this.oldPassword)
           api.account.login(this.account).then(response => {
             this.$dialog.loading.close()

@@ -68,7 +68,8 @@ a, button, input, textarea {
   border-bottom: none;
 }
 .page-about .yd-navbar{
-  background:rgba(0,0,0,.8)!important;
+  /*background:rgba(0,0,0,.8)!important;*/
+  background: #000000cc!important;
   height: 45px!important;
   font-size: 15px;
 }
@@ -103,7 +104,7 @@ a, button, input, textarea {
 }
 .login-list li{
   padding: 16px 0;
-  margin: 0 24px;
+  margin: 0 15px;
   display: flex;
   align-items: center;
 }
@@ -199,15 +200,15 @@ a, button, input, textarea {
 .integral-top .total .duihuan{font-size: 16px;}
 .my-form-box{margin: -42px 20px 20px;}
 .my-form-box .my-form-list{
-  padding: 25px 10px 40px;
+  padding: 10px 10px 20px;
   border-radius: 5px 5px;
   -webkit-border-radius: 5px 5px;
-  box-shadow:0 0 15px rgba(153,153,153,.3);
+  box-shadow: 0 0 15px rgba(153,153,153,.3);
   background: #fff;
 }
 .my-form-list li{
-  padding: 13px 0;
-  margin: 0 24px;
+  padding: 10px 0;
+  margin: 0 10px;
   display: flex;
   align-items: center;
   color: #333;
@@ -247,5 +248,20 @@ a, button, input, textarea {
   border-bottom: 2px solid #37A6F5;
   color:#37A6F5;
 }
-
+.btn-box{
+  margin:35px 20px 10px;
+}
+.btn-box .btn{
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: block;
+  width: 100%;
+  border:1px solid #37A6F5;
+  border-bottom: 2px solid #37A6F5;
+  color:#37A6F5;
+}
 

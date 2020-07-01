@@ -1,8 +1,22 @@
-import axios from '@/api/transport'
-import md5 from 'md5'
+import request from '@/utils/request'
+
+export function login(data) {
+  return request({
+    url: '/user/login',
+    method: 'post',
+    data
+  })
+}
+/*import axios from '@/api/transport'
+/!*import md5 from 'md5'*!/
 
 export default {
-  sendCode(mobile){
+  login(query) {
+    return new Promise((resolve, reject) => {
+      axios.post(`user/login`, query).then(resolve).catch(reject)
+    })
+  },
+  /!*sendCode(mobile){
     return new Promise((resolve, reject) => {
       axios.get(`basedata/agent/register/${mobile}/code`).then(resolve).catch(reject)
     })
@@ -16,11 +30,6 @@ export default {
   loginCode(mobile) {
     return new Promise((resolve, reject) => {
       axios.get(`basedata/agent/login/${mobile}/code`).then(resolve).catch(reject)
-    })
-  },
-  login(query) {
-    return new Promise((resolve, reject) => {
-      axios.post(`basedata/agent/login`, query).then(resolve).catch(reject)
     })
   },
   signin(query) {
@@ -42,5 +51,5 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post('basedata/agent/register/before',query).then(resolve).catch(reject)
     })
-  }
-}
+  }*!/
+}*/
