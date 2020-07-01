@@ -1,19 +1,56 @@
 import request from '@/utils/request'
 
-export function login(data) {
+/*export function login(username,password) {
   return request({
+    url: '/Login/dologin',
+    method: 'post',
+    data:{
+      username,
+      password
+    }
+  })
+}*/
+export function login(data) {
+  /*return request({
     url: '/user/login',
+    method: 'post',
+    data
+  })*/
+  let baseUrl='/user/login?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
     method: 'post',
     data
   })
 }
-/*import axios from '@/api/transport'
-/!*import md5 from 'md5'*!/
+export function register(data) {
+  /*return request({
+    url: '/user/register',
+    method: 'post',
+    data
+  })*/
+  let baseUrl='/user/register?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}
+
+/*
+import axios from '@/api/transport'
+import md5 from 'md5'
 
 export default {
   login(query) {
     return new Promise((resolve, reject) => {
-      axios.post(`user/login`, query).then(resolve).catch(reject)
+      axios.post(`/Login/dologin`, query).then(resolve).catch(reject)
     })
   },
   /!*sendCode(mobile){
@@ -52,4 +89,5 @@ export default {
       axios.post('basedata/agent/register/before',query).then(resolve).catch(reject)
     })
   }*!/
-}*/
+}
+*/

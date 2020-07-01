@@ -6,7 +6,7 @@ import Withdrawal from '@/views/my/Withdrawal'
 import MoneyRecord from '@/views/my/MoneyRecord'
 import WithdrawalRecord from '@/views/my/WithdrawalRecord'
 import Share from '@/views/my/Share'
-import Task from '@/views/my/Task'
+/*import Task from '@/views/my/Task'*/
 import LoginPassword from '@/views/my/LoginPassword'
 import WithdrawalPassword from '@/views/my/WithdrawalPassword'
 import Integral from '@/views/my/Integral'
@@ -70,14 +70,14 @@ export default [
       title: '充值记录'
     }
   },
-  {
+  /*{
     path: '/my/task',
     name: 'Task',
     component: Task,
     meta: {
       title: '我的任务'
     }
-  },
+  },*/
   {
     path: '/my/loginPassword',
     name: 'LoginPassword',

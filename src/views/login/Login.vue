@@ -8,7 +8,7 @@
         <ul class="login-list">
           <li>
             <img class="icon" src="@/assets/images/icon_user.png"/>
-            <yd-input v-model="query.account" placeholder="请输入用户名/手机号"></yd-input>
+            <yd-input v-model="query.username" placeholder="请输入用户名/手机号"></yd-input>
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_password.png"/>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import api from '@/api'
+  /*import api from '@/api'*/
   import md5 from 'md5'
   import identify from "@/components/identify"
   import {login} from '@/api/login'
@@ -45,11 +45,10 @@
       },
     data() {
       return {
-        //imgCode:'/static/images/code_img.png',
         query: {
-          account: '',
+          username:'',
           password:'',
-          code: ''
+          code:''
         },
           // 验证码初始值
           identifyCode: 'm6a8',
@@ -80,7 +79,7 @@
             }
         },
       login() {
-          if(!this.query.account){
+          if(!this.query.username){
               this.$dialog.toast({
                   mes:'请输入用户名/手机号'
               })
@@ -104,11 +103,10 @@
               return
           }
         this.$dialog.loading.open('加载中...');
-        //this.$router.push('/')
-        //this.$dialog.loading.close()
-        login(this.query).then(response => {
+         login(this.query).then(response => {
+             console.log(response)
           this.$dialog.loading.close()
-          if(response.code==200){
+          if(response.resultCode==1){
             this.$store.dispatch('addPrincipal', response.data).then(() => {
               this.$router.push('/')
             })
