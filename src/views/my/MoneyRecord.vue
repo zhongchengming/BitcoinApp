@@ -5,44 +5,44 @@
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
     </yd-navbar>
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+    <!--<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
         @load="onLoad"
-      >
+      >-->
         <ul class="money-record">
-          <li class="p-order-item" v-for="item,index in list" :key="index">
+          <li class="p-order-item" v-for="(item,index) in lists" :key="index">
             <div class="title row">
               <p class="no">
                 <span class="name">订单编号：</span>
-                <span v-text="item.number">202006292154067460</span>
+                <span v-text="item.ordernumber">202006292154067460</span>
               </p>
-              <span class="state" v-text="item.state">已撤销</span>
+              <span class="state" v-text="item.orderstate">已撤销</span>
             </div>
             <div class="msg">
               <div class="row">
                 <p>
                   <span class="name">充值方式：</span>
-                  <span v-text="item.moneyType">会员转账</span>
+                 <!-- <span v-text="item.moneyType">会员转账</span>-->
                 </p>
                 <p>
                   <span class="name">收 款 人：</span>
-                  <span v-text="item.username">会员转账</span>
+                  <span v-text="item.username">小张</span>
                 </p>
               </div>
               <p>
                 <span class="name">收款银行：</span>
-                <span v-text="item.cardName">中国农业银行</span>
+                <span v-text="item.bankcard">中国农业银行</span>
               </p>
               <p>
                 <span class="name">收款账号：</span>
-                <span v-text="item.card">6228480318401674276</span>
+               <!-- <span v-text="item.card">6228480318401674276</span>-->
               </p>
               <p>
                 <span class="name">充值时间：</span>
-                <span v-text="item.time">2018-07-08 15:13:14</span>
+                <span v-text="item.createdate">2018-07-08 15:13:14</span>
               </p>
               <p>
                 <span class="name">充值金额：</span>
@@ -53,12 +53,13 @@
           <ul>
           </ul>
         </ul>
-      </van-list>
-    </van-pull-refresh>
+      <!--</van-list>
+    </van-pull-refresh>-->
   </div>
 </template>
 
 <script>
+  import {selectOrder} from '@/api/my'
     export default {
         name: "MoneyRecord",
         data() {
@@ -66,8 +67,8 @@
                 loading: false,
                 finished: false,
                 refreshing: false,
-                list: [
-                    {
+                lists: [
+                    /*{
                         number: '202006292154067460',
                         moneyType: '会员转账',
                         money: '1000',
@@ -106,11 +107,31 @@
                         card: '6228480318401674276',
                         username: '董梦强',
                         state: '已撤销'
-                    }
+                    }*/
                 ]
             }
         },
+        mounted() {
+          this.load()
+        },
         methods:{
+          load() {
+            this.loading = true
+            let params={
+              userid:this.$store.state.user.userId
+            }
+            selectOrder(params).then(res => {
+              this.loading = false
+              if (res.resultCode == 1) {
+                this.lists = this.res.resultBody
+              } else {
+                this.allLoaded = true
+              }
+            }, () => {
+              this.loading = false
+              this.allLoaded = true
+            })
+          },
             onLoad() {
                 setTimeout(() => {
                     if (this.refreshing) {

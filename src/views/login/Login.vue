@@ -103,46 +103,18 @@
               return
           }
         this.$dialog.loading.open('加载中...');
-         login(this.query).then(response => {
+          /* this.$store.dispatch("Login",this.form).then((res)=>{*/
+        this.$store.dispatch("Login",this.query).then((response)=>{
+        /* login(this.query).then(response => {*/
              console.log(response)
           this.$dialog.loading.close()
           if(response.resultCode==1){
-            this.$store.dispatch('addPrincipal', response.data).then(() => {
               this.$router.push('/')
-            })
+            console.log(this.$store.state.user.userId)
           }
         },()=>{
           this.$dialog.loading.close()
         })
-
-       /* if (this.sendCode == false) {
-          this.account.password = md5(this.oldPassword)
-          api.account.login(this.account).then(response => {
-            this.$dialog.loading.close()
-            if(response.code==200){
-              this.$store.dispatch('addPrincipal', response.data).then(() => {
-                if(this.$route.query.lastPath){
-                  this.$router.push(this.$route.query.lastPath)
-                }else {
-                  this.$router.push('/')
-                }
-              })
-            }
-          },()=>{
-            this.$dialog.loading.close()
-          })
-        } else {
-          api.account.login(this.query).then(response => {
-            this.$dialog.loading.close()
-            if(response.code==200){
-              this.$store.dispatch('addPrincipal', response.data).then(() => {
-                this.$router.push('/')
-              })
-            }
-          },()=>{
-            this.$dialog.loading.close()
-          })
-        }*/
       },
       goSign(){
         this.$store.dispatch('clearAccount').then(()=>{

@@ -1,19 +1,19 @@
-import axios from '@/api/transport'
+import request from '@/utils/request'
 
-export default {
-  get() {
-    return new Promise((resolve, reject) => {
-      axios.get(`basedata/agent`).then(resolve).catch(reject)
-    })
-  },
-  modify(query) {
-    return new Promise((resolve, reject) => {
-      axios.post('basedata/agent/modify', query).then(resolve).catch(reject)
-    })
-  },
-  countCustomer(){
-    return new Promise((resolve,reject)=>{
-      axios.get('basedata/agent/customer/count').then(resolve).catch(reject)
-    })
+/*充值记录查询*/
+export function selectOrder(data) {
+  /*return request({
+    url: '/web/selectOrder',
+    method: 'post',
+    data
+  })*/
+  let baseUrl='/web/selectOrder?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
   }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
 }

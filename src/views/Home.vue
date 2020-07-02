@@ -109,7 +109,7 @@
       <yd-tabbar-item title="首页" link="#" active>
         <yd-icon name="home" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
-      <yd-tabbar-item title="购买" link="/money" >
+      <yd-tabbar-item title="购买" link="/my/money" >
         <yd-icon name="shopcart" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
       <yd-tabbar-item title="账户" link="/my">

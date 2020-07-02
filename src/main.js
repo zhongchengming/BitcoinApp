@@ -11,9 +11,9 @@ import 'vant/lib/vant-css/index.css'
 import VueProgressBar from 'vue-progressbar'
 import VueMoment from 'vue-moment'
 import moment from 'moment'
-
 router.beforeEach((to, from, next) => {
   console.log('before route', to.meta)
+  let hasToken = store.state.user.token
   if (to.meta.open) {
     if (to.meta.title) {
       document.title = to.meta.title
@@ -21,19 +21,17 @@ router.beforeEach((to, from, next) => {
     //无需登录验证的页面 直接放过
     next()
   } else {
-    next()
-    let valid = store.state.principal.isValid()
-    /*console.log('valid',valid)
-    if (!valid) {
-      //记住要跳转的路径
-      router.push({path:'/login',query:{lastPath:to.fullPath}})
-    } else {
+    console.log(hasToken)
+    if (hasToken) {
       if (to.meta.title) {
         document.title = to.meta.title
       }
       //token合法 放过
       next()
-    }*/
+    } else {
+      //记住要跳转的路径
+      router.push({path:'/login',query:{lastPath:to.fullPath}})
+    }
   }
 })
 

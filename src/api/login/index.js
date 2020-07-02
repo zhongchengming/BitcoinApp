@@ -1,15 +1,5 @@
 import request from '@/utils/request'
 
-/*export function login(username,password) {
-  return request({
-    url: '/Login/dologin',
-    method: 'post',
-    data:{
-      username,
-      password
-    }
-  })
-}*/
 export function login(data) {
   /*return request({
     url: '/user/login',

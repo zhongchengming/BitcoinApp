@@ -1,9 +1,9 @@
 <template>
 <div class="page-about">
-  <yd-navbar title="银行理" fixed>
-    <router-link to="/" slot="left">
+  <yd-navbar title="在线客服" fixed>
+    <div slot="left" @click="goback">
       <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
-    </router-link>
+    </div>
   </yd-navbar>
   <div class="kefu-box">
     <iframe src="https://aihecong.com/"></iframe>
@@ -13,7 +13,15 @@
 
 <script>
     export default {
-        name: "Service"
+        name: "Service",
+      data(){
+          return{}
+      },
+      methods:{
+          goback(){
+            this.$router.go(-1)
+          }
+      }
     }
 </script>
 

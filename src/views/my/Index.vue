@@ -2,10 +2,10 @@
   <div class="bottom-distance">
     <div class="my-top">
         <div class="title-box-wrap">
+          <img class="logo" src="@/assets/images/logo.png"/>
           <div class="title-text">
-            <img class="logo" src="@/assets/images/logo.png"/>
             <p>zhongchengming</p>
-            <p>盘口用户名xxx</p>
+            <p class="name">盘口用户名:小小张</p>
           </div>
         </div>
     </div>
@@ -180,7 +180,30 @@
     },
     methods:{
       logout(){
-        this.$router.push('/login')
+        this.$dialog.confirm({
+          title: '确定要退出吗？',
+          opts: [
+            {
+              txt: '取消',
+              color: false,
+              callback: () => {
+                this.$dialog.toast({mes: '已取消', timeout: 1000});
+              }
+            },
+            {
+              txt: '确定',
+              color: true,
+              callback: () => {
+                this.$store.dispatch('LogOut').then(()=>{
+                 /* this.$router.push('/login')*/
+                  location.reload()
+                })
+
+              }
+            }
+          ],
+        });
+        /*this.$router.push('/login')*/
       },
       load() {
         api.my.get().then(response => {
@@ -203,28 +226,35 @@
 
 <style scoped>
   .my-top {
-    height: 120px;
-    background:url("/static/images/banner_agent.png") no-repeat center center;
+    height: 100px;
+    /*background:url("/static/images/banner_agent.png") no-repeat center center;*/
     background-size: cover;
     width: 100%;
     box-sizing: border-box;
+    background: linear-gradient(top, #37A6F5, #8DCDFA);
+    background: -webkit-linear-gradient(top, #37A6F5, #8DCDFA);
+    background: -o-linear-gradient(top, #37A6F5, #8DCDFA);
+    background: -moz-linear-gradient(top, #37A6F5, #8DCDFA);
   }
   .title-box-wrap{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
     text-align: center;
-    padding: 12px;
-    color: #fff;
-    font-size: 16px;
+    padding: 12px 20px;
+    color: #333;
+    font-size: 14px;
     height: 100%;
+    font-weight: bold;
   }
-  .title-box-wrap .logo {width: 100px;margin-bottom: 10px;}
+  .title-box-wrap .logo {width: 80px;margin-right: 20px;}
+  .title-box-wrap .title-text{text-align: left;}
+  .title-text .name{color: #999;font-size: 12px;margin-top: 5px;font-weight: normal;}
   .my-link-list{
     display: flex;
-    margin: 10px;
+    margin-bottom: 10px;
     background: #fff;
-    border-radius: 6px;
+   /* border-radius: 6px;*/
     height: 70px;}
   .my-link-list li{
     flex-basis: 25%;
@@ -237,18 +267,19 @@
   }
   .my-link-list li .number{color: #56b3f6;margin-bottom: 3px;}
   .my-list{
-    margin: 10px;
-    border-radius: 6px;
+    margin: 10px 0;
+   /* border-radius: 6px;*/
     background: #fff;
   }
   .my-list ul li{
     display: flex;
     align-items: center;
     height: 44px;
-    margin:0 12px;
-  }
-  .my-list ul li:not(:last-child){
+    margin:0 20px;
     border-bottom: 1px solid #eee;
+  }
+  .my-list ul /deep/a:last-child li{
+    border-bottom: 0;
   }
   .my-list li .name{
     font-size: 14px;
@@ -266,6 +297,7 @@
     display: inline-block;
     width: 100%;
     border: 1px solid #24a7ff;
+    border-bottom:2px solid #24a7ff ;
     padding: 12px 0;
     font-size: 16px;
     border-radius: 6px;

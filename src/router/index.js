@@ -4,7 +4,7 @@ import Home from '@/views/Home'
 
 import login from './login'
 import hometab from './hometab'
-import accout from './accout'
+import my from './my'
 
 export default new Router({
   routes: [
@@ -18,6 +18,6 @@ export default new Router({
     },
     ...login,
     ...hometab,
-    ...accout
+    ...my
   ]
 })
