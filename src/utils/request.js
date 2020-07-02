@@ -1,5 +1,6 @@
 import axios from 'axios'
 /*import { MessageBox, Message,Notification } from 'element-ui'*/
+import { Toast} from 'vue-ydui/dist/lib.rem/dialog';
 import store from '@/store'
 /*import { getToken } from '@/utils/auth'*/
 
@@ -43,39 +44,21 @@ service.interceptors.response.use(
     //const res = response.data
     const code = response.status
     if(code===200){
-      if (response.data && response.data.code===200){
-        if(response.data.msg){
-          Notification({
-            title:'提示信息',
-            showClose:true,
-            message:response.data.msg,
-            type:'success',
-            duration:2000
-          })
-          /* Message({
-               message:response.data.msg,
-               type:'success',
-               duration:2*1000
-           })*/
+      console.log(response.data)
+      if (response.data && response.data.resultCode===1){
+        if(response.data.resultMsg){
+          Toast({ mes: response.data.resultMsg})
         }
         return response.data
       }else{
         //出现业务异常
-        Message({
-          message:response.data.msg,
-          type:'error',
-          duration:5*1000
-        })
+        Toast({ mes: response.data.resultMsg || '出错了' })
         return response.data
       }
 
     }else {
       //应该走不到这一步
-      Message({
-        message:response.data.msg,
-        type:'error',
-        duration:5*1000
-      })
+      Toast({ mes: response.data.resultMsg || '出错了' })
       return Promise.reject(response.data)
     }
     // if the custom code is not 20000, it is judged as an error.

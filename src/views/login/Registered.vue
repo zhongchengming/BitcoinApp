@@ -12,31 +12,19 @@
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_password.png"/>
-            <yd-input type="password" v-model="query.oldPassword" placeholder="请输入密码"></yd-input>
-          </li>
-          <li>
-            <img class="icon" src="@/assets/images/icon_password.png"/>
-            <yd-input type="password" v-model="query.oldPasswordConfirm" placeholder="请输入确认密码"></yd-input>
+            <yd-input type="password" v-model="query.password" placeholder="请输入密码"></yd-input>
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_code.png"/>
-            <yd-input type="text" v-model="query.yqcode" placeholder="请输入邀请码"></yd-input>
+            <yd-input type="text" v-model="query.invitationcode" placeholder="请输入邀请码"></yd-input>
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_code.png"/>
             <div class="right">
               <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
-              <div class="code-wrap" @click="changeCode">
-                <img :src="imgCode" style="width:84px"/>
+              <div class="code-wrap" @click="changeCode()">
+                <identify :identifyCode="identifyCode"></identify>
               </div>
-              <!--<yd-sendcode class="send-btn" v-model="sendCode"
-                           @click.native="sendCode1"
-                           init-str="获取验证码"
-                           second="60"
-                           run-str="重新发送({%s})"
-                           reset-str="重新发送"
-                           type="warning">
-              </yd-sendcode>-->
             </div>
           </li>
         </ul>
@@ -48,58 +36,52 @@
 </template>
 
 <script>
-  import api from '@/api'
-  import {mapGetters} from 'vuex'
+ /* import api from '@/api'
+  import {mapGetters} from 'vuex'*/
+ import identify from "@/components/identify"
+ import {register} from '@/api/login'
 
   export default {
     name: "register",
+    components: {
+        identify
+    },
     data() {
       return {
-        imgCode:'/static/images/code_img.png',
         query: {
           username: '',
-          oldPassword: '',
-          oldPasswordConfirm: '',
+          password: '',
           code: '',
-          yqcode: '',
-        }
+          invitationcode: '',
+        },
+        // 验证码初始值
+        identifyCode: 'm6a8',
+        // 验证码的随机取值范围
+        identifyCodes: '123456789abcdefghjkmnpqrstuvwxyz'
       }
     },
+    mounted() {
+        // 刷新页面就生成随机验证码
+        this.identifyCode = ''
+        this.makeCode(this.identifyCodes, 4)
+    },
     methods: {
-      sendCode() {
-        if (!this.query.mobilePhone) {
-          this.$dialog.toast({
-            mes: '请输入手机号'
-          })
-          return
-        }
-        if (!/^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(this.query.mobilePhone)) {
-          this.$dialog.toast({
-            mes: '手机号格式不正确'
-          })
-          return
-        }
-        this.$dialog.loading.open('发送中...');
-        setTimeout(() => {
-          api.account.sendCode(this.query.mobilePhone).then(response => {
-            if (response.code == 200) {
-              this.sendMsg = true;
-              this.$dialog.loading.close();
-              this.$dialog.toast({
-                mes: '已发送',
-                icon: 'success',
-                timeout: 1500
-              });
-            } else {
-              this.$dialog.loading.close();
+        // 点击验证码刷新验证码
+        changeCode() {
+            this.identifyCode = ''
+            this.makeCode(this.identifyCodes, 4)
+        },
+        // 生成一个随机整数  randomNum(0, 10) 0 到 10 的随机整数， 包含 0 和 10
+        randomNum(min, max) {
+            max = max + 1
+            return Math.floor(Math.random() * (max - min) + min)
+        },
+        // 随机生成验证码字符串
+        makeCode(data, len) {
+            for (let i = 0; i < len; i++) {
+                this.identifyCode += data[this.randomNum(0, data.length - 1)]
             }
-          })
-        }, 1000);
-      },
-      changeCode(){
-        var num=Math.ceil(Math.random()*10);//生成一个随机数（防止缓存）
-        this.imgCode = "url?" + num;
-      },
+        },
       gosign() {
         if (!this.query.username) {
           this.$dialog.toast({
@@ -107,19 +89,13 @@
           })
           return
         }
-        if (!this.query.oldPassword) {
+        if (!this.query.password) {
           this.$dialog.toast({
             mes: '密码不能为空'
           })
           return
         }
-        if (!this.query.oldPasswordConfirm) {
-          this.$dialog.toast({
-            mes: '确认密码不能为空'
-          })
-          return
-        }
-        if (!this.query.yqcode) {
+        if (!this.query.invitationcode) {
           this.$dialog.toast({
             mes: '邀请码不能为空'
           })
@@ -131,27 +107,16 @@
           })
           return
         }
-       /* this.preQuery.code = this.query.code
-        this.preQuery.mobilePhone = this.query.mobilePhone*/
         this.$dialog.loading.open('加载中...');
-        this.$router.push('/login')
-        this.$dialog.loading.close()
-       /* api.account.preRegister(this.query).then(response => {
+          register(this.query).then(response => {
           this.$dialog.loading.close()
-          if (response.code == 200) {
-            if (response.data == '1') {
-              this.submitModel = true
-              this.hregistered = true
-            } else if (response.data == '0') {
-              this.submitModel = true
-              this.review = true
-            } else {
-              this.$router.push('/registered/second')
-            }
+          if (response.resultCode == 1) {
+              this.$router.push('/login')
+              this.$dialog.loading.close()
           }
         },()=>{
           this.$dialog.loading.close()
-        })*/
+        })
       },
       gologin() {
         this.$router.push('/login')

@@ -4,16 +4,17 @@ import store from "../store"
 import qs from 'qs'
 import app from '../main'
 
-console.log(process)
+/*console.log(process)
 if (process.env) {
   console.log(process.env)
-  /*axios.defaults.baseURL = `${process.env.baseURL}api/`*/
-  axios.defaults.baseURL = `${process.env.baseURL}`
+  /!*axios.defaults.baseURL = `${process.env.baseURL}api/`*!/
+  axios.defaults.baseURL = process.env.baseURL
 } else {
   axios.defaults.baseURL = '/api/'
-}
+}*/
 
 axios.interceptors.request.use(request => {
+  axios.defaults.baseURL = process.env.baseURL
   app.$Progress.start()
   let token = store.state.principal.token
   if(token) {

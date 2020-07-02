@@ -45,11 +45,11 @@
         <p>新手指导</p>
         </router-link>
       </li>
-      <li @click="kefu()">
-        <!--<router-link to="https://aihecong.com/">-->
+      <li>
+        <router-link to="/service">
         <div class="wrap"><i class="icon iconfont iconkefu"></i></div>
         <p>在线客服</p>
-       <!-- </router-link>-->
+        </router-link>
       </li>
       <li>
         <router-link to="/download">

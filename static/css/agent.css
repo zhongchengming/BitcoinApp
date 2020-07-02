@@ -115,7 +115,12 @@ a, button, input, textarea {
   width: 19px;
   vertical-align: middle;
 }
-.login-list li input,.login-list li input::-webkit-input-placeholder{
+.login-list li input{
+  font-size: 14px;
+  color: #333;
+  font-family:"Microsoft YaHei",Arial;
+}
+.login-list li input::-webkit-input-placeholder{
   font-size: 14px;
   color: #999;
   font-family:"Microsoft YaHei",Arial;
