@@ -2,7 +2,7 @@ import axios from 'axios'
 /*import { MessageBox, Message,Notification } from 'element-ui'*/
 import { Toast} from 'vue-ydui/dist/lib.rem/dialog';
 import store from '@/store'
-/*import { getToken } from '@/utils/auth'*/
+import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -17,7 +17,8 @@ service.interceptors.request.use(
     // do something before request is sent
 
     if (store.state.user.token){
-      config.headers['token'] = store.state.user.token
+      /*config.headers['token'] = store.state.user.token*/
+      config.headers['token'] = getToken()
     }
     return config
   },

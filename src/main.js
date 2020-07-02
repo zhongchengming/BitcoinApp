@@ -11,9 +11,11 @@ import 'vant/lib/vant-css/index.css'
 import VueProgressBar from 'vue-progressbar'
 import VueMoment from 'vue-moment'
 import moment from 'moment'
+
+import { getToken } from '@/utils/auth'
 router.beforeEach((to, from, next) => {
-  console.log('before route', to.meta)
-  let hasToken = store.state.user.token
+  /*console.log('before route', to.meta)*/
+  const hasToken = getToken()
   if (to.meta.open) {
     if (to.meta.title) {
       document.title = to.meta.title

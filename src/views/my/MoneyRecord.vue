@@ -49,9 +49,8 @@
               </p>
             </div>
           </li>
-          <ul>
-          </ul>
         </ul>
+        <p class="no-data" v-if="!lists.length">暂无数据</p>
       <!--</van-list>
     </van-pull-refresh>-->
   </div>
@@ -113,6 +112,12 @@
 
 <style scoped>
   .money-record {}
+  .no-data{
+    color: #666;
+    font-size: 20px;
+    margin-top: 70px;
+    text-align: center;
+  }
   .row {
     display: flex;
     align-items: center;

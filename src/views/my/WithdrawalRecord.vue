@@ -50,9 +50,7 @@
               </p>
             </div>
           </li>
-          <ul>
           </ul>
-        </ul>
       </van-list>
     </van-pull-refresh>
   </div>

@@ -12,7 +12,7 @@
     <ul class="my-link-list">
       <li>
         <div>
-          <p class="number">702900</p>
+          <p class="number" v-text="this.$store.state.user.invitationcode">702900</p>
           <p>邀请码</p>
         </div>
       </li>

@@ -105,7 +105,6 @@
             })
         },
         goDetail(item){
-            debugger
             console.log(item)
              this.listBank.bankname=item.bankname,
               this.listBank.bankcno=item.bankcno,

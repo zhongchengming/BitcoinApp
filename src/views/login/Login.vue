@@ -110,9 +110,7 @@
         })
       },
       goSign(){
-        this.$store.dispatch('clearAccount').then(()=>{
           this.$router.push('/registered')
-        })
       }
     }
   }
