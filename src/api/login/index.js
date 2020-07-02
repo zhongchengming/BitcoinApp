@@ -16,6 +16,13 @@ export function login(data) {
     data
   })
 }
+export function outLogin(data) {
+  return request({
+    url: '/user/outLogin',
+    method: 'post',
+    data
+  })
+}
 export function register(data) {
   /*return request({
     url: '/user/register',

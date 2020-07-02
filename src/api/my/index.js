@@ -17,8 +17,15 @@ export function selectOrder(data) {
     data
   })
 }
-/*export function selectOrder(data) {
-  let baseUrl='/web/selectOrder?'
+export function queryBankList() {
+  return request({
+    url: '/other/bankList',
+    method: 'post'
+  })
+}
+
+export function updateOrderApp(data) {
+  let baseUrl='/web/updateOrderApp?'
   for(var i in data){
     baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
   }
@@ -27,4 +34,4 @@ export function selectOrder(data) {
     method: 'post',
     data
   })
-}*/
+}

@@ -12,11 +12,6 @@ export default [
     }
   },
   {
-    path: '/logout',
-    name: 'logout',
-    component: ()=> import('@/views/login/LogOut')
-  },
-  {
     path: '/registered',
     name: 'Registered',
     component: Registered,

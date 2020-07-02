@@ -99,7 +99,6 @@
           }
         this.$dialog.loading.open('加载中...');
         this.$store.dispatch("Login",this.query).then((response)=>{
-        debugger
              console.log(response)
           this.$dialog.loading.close()
           if(response.resultCode==1){

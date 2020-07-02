@@ -7,9 +7,9 @@
     </yd-navbar>
     <div class="money-page">
       <ul class="package-list">
-        <li>
+        <li v-for="(item,index) in lists" @click="goDetail(item)">
           <p>包月</p>
-          <p>1000元</p>
+          <p v-text="item.money">1000元</p>
         </li>
       </ul>
       <ul class="money-list">
@@ -17,44 +17,43 @@
           <div class="title" @click="backTextBox=!backTextBox">
             <div class="left">
               <img class="icon" slot="icon" src="@/assets/images/union-pay.svg">
-              <span>中国农业银行</span>
+              <span v-text="listBank.bankname">中国农业银行</span>
             </div>
             <i class="icon iconfont iconiconfontjiantou5 arrow"></i>
           </div>
           <div v-show="backTextBox" class="back-detail-box">
             <p class="item-text">
               <span class="bank-title">收款银行：</span>
-              <span class="bank-text" v-text="listBank.cardname">
+              <span class="bank-text" v-text="listBank.bankname">
                 农业银行
               </span>
-              <button class="copy-btn copy-cardname" :data-clipboard-text="listBank.cardname"
-                      @click="copyText('cardname')">复制
+              <button class="copy-btn copy-cardname" :data-clipboard-text="listBank.bankname"
+                      @click="copyText('bankname')">复制
               </button>
-
             </p>
             <p class="item-text">
               <span class="bank-title">收款账号：</span>
-              <span class="bank-text" v-text="listBank.cardno">
+              <span class="bank-text" v-text="listBank.bankcno">
                 6228480318401674276
               </span>
-              <button class="copy-btn copy-cardno" :data-clipboard-text="listBank.cardname"
-                      @click="copyText('cardno')">复制
+              <button class="copy-btn copy-cardno" :data-clipboard-text="listBank.bankcno"
+                      @click="copyText('bankcno')">复制
               </button>
             </p>
             <p class="item-text">
               <span class="bank-title">收 款 人：</span>
-              <span class="bank-text" v-text="listBank.username">
+              <span class="bank-text" v-text="listBank.name">
                 董梦强
               </span>
-              <button class="copy-btn copy-username" :data-clipboard-text="listBank.cardname"
-                      @click="copyText('username')">复制
+              <button class="copy-btn copy-username" :data-clipboard-text="listBank.name"
+                      @click="copyText('name')">复制
               </button>
             </p>
             <p class="item-text">
               <span class="bank-title">充值金额：</span>
               <span class="bank-text" v-text="listBank.money" style="color:darkred;">1000</span>
             </p>
-            <button class="btn-blue">我已充值</button>
+            <button class="btn-blue" @click="moneyBtn(listBank.id)">我已充值</button>
             <div class="notices-list">
               <p>转账成功后截图发给客服，在此页面提交充值申请。</p>
             </div>
@@ -70,23 +69,12 @@
           </div>
         </li>
       </ul>
-      <!--<yd-cell-group class="money-list">
-        <yd-cell-item arrow>
-          <img class="icon" slot="icon" src="@/assets/images/union-pay.svg">
-          <span slot="left">人工客服</span>
-        </yd-cell-item>
-
-        <yd-cell-item arrow>
-         &lt;!&ndash; <yd-icon slot="icon" name="order"></yd-icon>&ndash;&gt;
-          <i slot="icon" class="icon iconfont iconkefu"></i>
-          <span slot="left">人工客服</span>
-        </yd-cell-item>
-      </yd-cell-group>-->
     </div>
   </div>
 </template>
 
 <script>
+   import {queryBankList,updateOrderApp} from '@/api/my'
   import Clipboard from 'clipboard'
   export default {
     name: "money",
@@ -94,22 +82,53 @@
       return {
         backTextBox: false,
         listBank:{
-          cardname:'农业银行',
-          cardno:'6228480318401674276',
-          username:'董梦强',
-          money:'1000'
-        }
+           bankname:'',
+            bankcno:'',
+            name:'',
+          money:'',
+            id:''
+        },
+         lists:[]
       }
     },
+      mounted() {
+          this.load()
+      },
     methods:{
+        load(){
+            queryBankList().then(res => {
+                console.log(res.resultBody)
+                if (res.resultCode == 1) {
+                    this.lists = res.resultBody
+                    this.listBank=res.resultBody[0]
+                }
+            })
+        },
+        goDetail(item){
+            debugger
+            console.log(item)
+             this.listBank.bankname=item.bankname,
+              this.listBank.bankcno=item.bankcno,
+              this.listBank.name=item.name,
+              this.listBank.money=item.money,
+              this.listBank.id=item.id
+        },
+        moneyBtn(id){
+            let params={
+                userid:this.$store.state.user.userId
+            }
+            updateOrderApp(params).then(res => {
+               console.log(res)
+              })
+        },
       // 复制
       copyText(str) {
-        if(str=='cardname'){
-          var clipboard = new Clipboard('.copy-cardname')
-        }else if(str=='cardno'){
-          var clipboard = new Clipboard('.copy-cardno')
-        }else if(str=='username'){
-          var clipboard = new Clipboard('.copy-username')
+        if(str=='bankname'){
+          var clipboard = new Clipboard('.copy-bankname')
+        }else if(str=='bankcno'){
+          var clipboard = new Clipboard('.copy-bankcno')
+        }else if(str=='name'){
+          var clipboard = new Clipboard('.copy-name')
         }
         clipboard.on('success', e => {
           let instance = this.$toast('复制成功');
@@ -139,11 +158,10 @@
 </script>
 
 <style scoped>
-  .blue{color: #56b3f6;margin-left: 5px}
   .money-page {
     padding: 20px;
   }
-
+  .package-list{display: flex;}
   .package-list li {
     width: 70px;
     background: #56b3f6;
@@ -155,7 +173,7 @@
     text-align: center;
     position: relative;
     overflow: initial;
-    margin-bottom: 10px;
+    margin-right: 10px;
     padding: 12px;
   }
 

@@ -19,14 +19,13 @@
                 <span class="name">订单编号：</span>
                 <span v-text="item.ordernumber">202006292154067460</span>
               </p>
-              <span class="state" v-text="item.orderstate">已撤销</span>
+              <span class="state">
+                {{item.orderstate==0?'创建成功':item.orderstate==1?'已充值等待审核':item.orderstate==2?'充值失败':item.orderstate==3?'已充值已审核':'审核不通过'}}
+              </span>
+              <!--订单状态（0创建成功）（1已充值等待审核）（2充值失败）（3已充值已审核）（4审核不通过）-->
             </div>
             <div class="msg">
               <div class="row">
-               <!-- <p>
-                  <span class="name">充值方式：</span>
-                 &lt;!&ndash; <span v-text="item.moneyType">会员转账</span>&ndash;&gt;
-                </p>-->
                 <p>
                   <span class="name">收 款 人：</span>
                   <span v-text="item.username">小张</span>
@@ -64,9 +63,6 @@
         name: "MoneyRecord",
         data() {
             return {
-                loading: false,
-                finished: false,
-                refreshing: false,
                 lists: []
             }
         },
@@ -80,19 +76,13 @@
               userid:this.$store.state.user.userId
             }
             selectOrder(params).then(res => {
-              this.loading = false
               if (res.resultCode == 1) {
                 console.log(res.resultBody)
                 this.lists = res.resultBody
-              } else {
-                this.allLoaded = true
               }
-            }, () => {
-              this.loading = false
-              this.allLoaded = true
             })
           },
-            onLoad() {
+          /*  onLoad() {
                 setTimeout(() => {
                     if (this.refreshing) {
                         this.list = [];
@@ -116,7 +106,7 @@
                 // 将 loading 设置为 true，表示处于加载状态
                 this.loading = false;
                 this.onLoad();
-            }
+            }*/
         }
     }
 </script>

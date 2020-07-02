@@ -44,7 +44,6 @@ service.interceptors.response.use(
     //const res = response.data
     const code = response.status
     if(code===200){
-      console.log(response.data)
       if (response.data && response.data.resultCode===1){
         if(response.data.resultMsg){
           Toast({ mes: response.data.resultMsg})
@@ -89,11 +88,7 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+    Toast({ mes: error.message})
     return Promise.reject(error)
   }
 )

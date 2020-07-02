@@ -1,13 +1,11 @@
-import { login} from '@/api/login'
-/*import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'*/
+import { login,outLogin} from '@/api/login'
 
 const user={
   state:{
    /* token: getToken(),*/
     token:'',
     userId: '',
-    avatar: ''
+    username:''
   },
   mutations :{
     SET_TOKEN: (state, token) => {
@@ -15,6 +13,9 @@ const user={
     },
     SET_UNSER_ID: (state, userId) => {
       state.userId = userId
+    },
+    SET_UNSER_NAME: (state, username) => {
+      state.username = username
     }
   },
   actions :{
@@ -22,10 +23,10 @@ const user={
       return new Promise((resolve,reject) =>{
         login(loginForm).then(response=>{
           let data=response.resultBody
-          debugger
           if(data.token){
             commit('SET_TOKEN',data.token)
             commit('SET_UNSER_ID',data.user.id)
+            commit('SET_UNSER_NAME',data.user.username)
           }
           resolve(response)
         }).catch(error=>{
@@ -34,13 +35,25 @@ const user={
       })
     },
     //退出
-    LogOut({commit,state}){
+    async LogOut({commit,dispatch},dataParm){
+      return new Promise((resolve,reject) =>{
+        outLogin(dataParm).then(response=>{
+          commit('SET_TOKEN','')
+          commit('SET_UNSER_ID','')
+          commit('SET_UNSER_NAME','')
+          resolve(response)
+        }).catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    /*LogOut({commit,state}){
       return new Promise(resolve => {
         commit('SET_TOKEN','')
         commit('SET_UNSER_ID','')
         resolve()
       })
-    }
+    }*/
   }
 }
 export default user

@@ -4,7 +4,7 @@
         <div class="title-box-wrap">
           <img class="logo" src="@/assets/images/logo.png"/>
           <div class="title-text">
-            <p>zhongchengming</p>
+            <p v-text="username">zhongchengming</p>
             <p class="name">盘口用户名:小小张</p>
           </div>
         </div>
@@ -71,6 +71,7 @@
     name: "index",
     data() {
       return {
+         /* username:'',*/
           lists:[
               {
                   url:'' ,
@@ -150,34 +151,24 @@
                   name:'银行卡管理',
                   icon:'iconyinxingqia'
               }
-          ],
-        agent: {
-          agentName: '',
-          company: '',
-          companyAddress: '',
-          companyPhone: '',
-          proofImg: '',
-          birthday: '',
-          mobilePhone: '',
-          agentType: '',
-          province:'',
-          provinceName:'',
-          city:'',
-          cityName:'',
-          district:'',
-          districtName:'',
-          agentSite: '',
-          avatar: ''
-        },
-        customerCount:0
+          ]
       }
     },
+      computed:{
+          username(){
+              return this.$store.state.user.username
+          }
+      },
     mounted(){
       /*this.load()
       this.countCustomer()*/
     },
     methods:{
       logout(){
+          let params={
+              userid:this.$store.state.user.userId,
+              token:this.$store.state.user.token
+          }
         this.$dialog.confirm({
           title: '确定要退出吗？',
           opts: [
@@ -192,7 +183,7 @@
               txt: '确定',
               color: true,
               callback: () => {
-                this.$store.dispatch('LogOut').then(()=>{
+                this.$store.dispatch('LogOut',params).then(()=>{
                  /* this.$router.push('/login')*/
                   location.reload()
                 })
@@ -229,7 +220,7 @@
     text-align: center;
     padding: 12px 20px;
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     font-weight: bold;
   }

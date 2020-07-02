@@ -116,74 +116,46 @@
         <yd-icon name="ucenter-outline" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
     </yd-tabbar>
-    <!--<footer class="footer-tab">
-      <ul>
-        <li class="active">
-          <router-link to="/">
-            <img src="@/assets/images/icon_tab_home.png" />
-            &lt;!&ndash;<i class="icon "></i>&ndash;&gt;
-            <p>首页</p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/order">
-            <img src="@/assets/images/icon_tab_user.png" />
-            <p>购买</p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/my">
-            <img src="@/assets/images/icon_tab_my.png" />
-            <p>账户</p>
-          </router-link>
-        </li>
-      </ul>
-    </footer>-->
     </div>
 </template>
 
 <script>
-  /*import api from '@/api'*/
+  import {messagelist} from '@/api/common/user'
 
   export default {
     name: "home",
+      data(){
+        return{
+            /*lists: [
+                "加载脚本...",
+                "连接bite平台..",
+                "嵌入脚本...",
+                "加载数据..",
+                "绑定数据....",
+                "设置成功...."
+            ]*/
+            lists:[]
+        }
+      },
     mounted(){
-      /*this.countCustomer()*/
-    },
-    data(){
-      return{
-      }
+      this.load()
     },
     methods:{
       goMy(){
         this.$router.push('/my')
       },
-        kefu(){
-            window.location.href = 'https://aihecong.com/'
-
-            //   this.kefurl=
-            /*if (navigator.userAgent.indexOf("Html5Plus") > -1) {
-                //判断是否在APP内，由APP封装的方法调用浏览器打开
-                plus.runtime.openURL(this.settings.KEFU);
-            } else {
-                //不在APP内
-                var u = navigator.userAgent;
-                var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                if(isiOS){
-                    location.href=this.settings.KEFU;
-                }else {
-                    //打开新页面
-                    window.open(this.settings.KEFU);
-                }
-            }*/
-        },
-      /*countCustomer() {
-        api.my.countCustomer().then(response => {
-          if (response.code == 200) {
-            this.customerCount = response.data
-          }
+      load() {
+          messagelist().then(response => {
+              console.log(response)
+              this.lists =response.resultBody
+              for (let i in this.lists) {
+                  this.$dialog.toast({
+                      mes:this.lists[i]
+                  })
+                  console.log(this.lists[i])
+              }
         })
-      }*/
+      }
     }
   }
 </script>
