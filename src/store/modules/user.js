@@ -21,12 +21,12 @@ const user={
     async Login({commit,dispatch},loginForm){
       return new Promise((resolve,reject) =>{
         login(loginForm).then(response=>{
-          commit('SET_TOKEN','token22211')
-          commit('SET_UNSER_ID',response.resultBody.id)
-          /*if(response.token){
-            //setToken(response.token)
-            commit('SET_TOKEN',response.token)
-          }*/
+          let data=response.resultBody
+          debugger
+          if(data.token){
+            commit('SET_TOKEN',data.token)
+            commit('SET_UNSER_ID',data.user.id)
+          }
           resolve(response)
         }).catch(error=>{
           reject(error)

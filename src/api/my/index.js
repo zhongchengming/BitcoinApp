@@ -17,3 +17,14 @@ export function selectOrder(data) {
     data
   })
 }
+/*export function selectOrder(data) {
+  let baseUrl='/web/selectOrder?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}*/

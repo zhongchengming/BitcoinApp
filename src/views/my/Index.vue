@@ -56,7 +56,7 @@
       <yd-tabbar-item title="首页" link="/">
         <yd-icon name="home" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
-      <yd-tabbar-item title="购买" link="/money" >
+      <yd-tabbar-item title="购买" link="/my/money" >
         <yd-icon name="shopcart" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
       <yd-tabbar-item title="账户" active link="">
@@ -67,8 +67,6 @@
 </template>
 
 <script>
-  import api from '@/api'
-
   export default {
     name: "index",
     data() {
@@ -206,19 +204,7 @@
         /*this.$router.push('/login')*/
       },
       load() {
-        api.my.get().then(response => {
-          if (response.code == 200) {
-            this.agent = response.data
-            this.agent.birthday = this.getFormatDate(this.agent.birthday)
-          }
-        })
-      },
-      countCustomer() {
-        api.my.countCustomer().then(response => {
-          if (response.code == 200) {
-            this.customerCount = response.data
-          }
-        })
+
       }
     }
   }

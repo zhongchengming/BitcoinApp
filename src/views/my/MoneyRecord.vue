@@ -23,10 +23,10 @@
             </div>
             <div class="msg">
               <div class="row">
-                <p>
+               <!-- <p>
                   <span class="name">充值方式：</span>
-                 <!-- <span v-text="item.moneyType">会员转账</span>-->
-                </p>
+                 &lt;!&ndash; <span v-text="item.moneyType">会员转账</span>&ndash;&gt;
+                </p>-->
                 <p>
                   <span class="name">收 款 人：</span>
                   <span v-text="item.username">小张</span>
@@ -38,7 +38,7 @@
               </p>
               <p>
                 <span class="name">收款账号：</span>
-               <!-- <span v-text="item.card">6228480318401674276</span>-->
+                <span v-text="item.cardnumber">6228480318401674276</span>
               </p>
               <p>
                 <span class="name">充值时间：</span>
@@ -67,48 +67,7 @@
                 loading: false,
                 finished: false,
                 refreshing: false,
-                lists: [
-                    /*{
-                        number: '202006292154067460',
-                        moneyType: '会员转账',
-                        money: '1000',
-                        time: '2020-06-29 21:54:06',
-                        cardName: '中国农业银行',
-                        card: '6228480318401674276',
-                        username: '董梦强',
-                        state: '已撤销'
-                    },
-                    {
-                        number: '202006292154067460',
-                        moneyType: '会员转账',
-                        money: '1000',
-                        time: '2020-06-29 21:54:06',
-                        cardName: '中国农业银行',
-                        card: '6228480318401674276',
-                        username: '董梦强',
-                        state: '已撤销'
-                    },
-                    {
-                        number: '202006292154067460',
-                        moneyType: '会员转账',
-                        money: '1000',
-                        time: '2020-06-29 21:54:06',
-                        cardName: '中国农业银行',
-                        card: '6228480318401674276',
-                        username: '董梦强',
-                        state: '已撤销'
-                    },
-                    {
-                        number: '202006292154067460',
-                        moneyType: '会员转账',
-                        money: '1000',
-                        time: '2020-06-29 21:54:06',
-                        cardName: '中国农业银行',
-                        card: '6228480318401674276',
-                        username: '董梦强',
-                        state: '已撤销'
-                    }*/
-                ]
+                lists: []
             }
         },
         mounted() {
@@ -123,7 +82,8 @@
             selectOrder(params).then(res => {
               this.loading = false
               if (res.resultCode == 1) {
-                this.lists = this.res.resultBody
+                console.log(res.resultBody)
+                this.lists = res.resultBody
               } else {
                 this.allLoaded = true
               }

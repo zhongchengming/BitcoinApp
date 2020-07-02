@@ -32,12 +32,7 @@
 </template>
 
 <script>
-  /*import api from '@/api'*/
-  import md5 from 'md5'
   import identify from "@/components/identify"
-  import {login} from '@/api/login'
-
-
   export default {
     name: "login",
       components: {
@@ -103,9 +98,8 @@
               return
           }
         this.$dialog.loading.open('加载中...');
-          /* this.$store.dispatch("Login",this.form).then((res)=>{*/
         this.$store.dispatch("Login",this.query).then((response)=>{
-        /* login(this.query).then(response => {*/
+        debugger
              console.log(response)
           this.$dialog.loading.close()
           if(response.resultCode==1){
