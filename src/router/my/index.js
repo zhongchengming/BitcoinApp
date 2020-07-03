@@ -2,11 +2,14 @@
 import Money from '@/views/my/Money'
 import My from '@/views/my/Index'
 import IntegralExchange from '@/views/my/IntegralExchange'
+import IntegralMoney from '@/views/my/IntegralMoney'
 import Withdrawal from '@/views/my/Withdrawal'
 import MoneyRecord from '@/views/my/MoneyRecord'
+import IntegralExchangeRecord from '@/views/my/IntegralExchangeRecord'
+import IntegralMoneyRecord from '@/views/my/IntegralMoneyRecord'
 import WithdrawalRecord from '@/views/my/WithdrawalRecord'
 import Share from '@/views/my/Share'
-/*import Task from '@/views/my/Task'*/
+import Task from '@/views/my/Task'
 import LoginPassword from '@/views/my/LoginPassword'
 import WithdrawalPassword from '@/views/my/WithdrawalPassword'
 import Integral from '@/views/my/Integral'
@@ -47,6 +50,30 @@ export default [
     }
   },
   {
+    path: '/my/integralMoney',
+    name: 'IntegralMoney',
+    component: IntegralMoney,
+    meta: {
+      title: '积分充值'
+    }
+  },
+  {
+    path: '/my/integralExchangeRecord',
+    name: 'IntegralExchangeRecord',
+    component: IntegralExchangeRecord,
+    meta: {
+      title: '积分兑换记录'
+    }
+  },
+  {
+    path: '/my/integralMoneyRecord',
+    name: 'IntegralMoneyRecord',
+    component: IntegralMoneyRecord,
+    meta: {
+      title: '积分充值记录'
+    }
+  },
+  {
     path: '/my/moneyRecord',
     name: 'MoneyRecord',
     component: MoneyRecord,
@@ -70,14 +97,14 @@ export default [
       title: '充值记录'
     }
   },
-  /*{
+  {
     path: '/my/task',
     name: 'Task',
     component: Task,
     meta: {
       title: '我的任务'
     }
-  },*/
+  },
   {
     path: '/my/loginPassword',
     name: 'LoginPassword',

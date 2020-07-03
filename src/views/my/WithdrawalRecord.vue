@@ -5,58 +5,49 @@
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
     </yd-navbar>
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+    <!--<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
         @load="onLoad"
-      >
+      >-->
         <ul class="money-record">
-          <li class="p-order-item" v-for="item,index in list" :key="index">
+          <li class="p-order-item" v-for="item,index in lists" :key="index">
             <div class="title row">
               <p class="no">
-                <span class="name">订单编号：</span>
-                <span v-text="item.number">202006292154067460</span>
+                <span class="name">真实姓名：</span>
+                <span v-text="item.realname">202006292154067460</span>
               </p>
-              <span class="state" v-text="item.state">已撤销</span>
+              <span class="state">{{item.state==0?'审核中':item.state==1?'提现成功':''}}</span>
             </div>
             <div class="msg">
-              <div class="row">
-                <p>
-                  <span class="name">充值方式：</span>
-                  <span v-text="item.moneyType">会员转账</span>
-                </p>
-                <p>
-                  <span class="name">收 款 人：</span>
-                  <span v-text="item.username">会员转账</span>
-                </p>
-              </div>
               <p>
                 <span class="name">收款银行：</span>
-                <span v-text="item.cardName">中国农业银行</span>
+                <span v-text="item.bankname">中国农业银行</span>
               </p>
               <p>
-                <span class="name">收款账号：</span>
-                <span v-text="item.card">6228480318401674276</span>
+                <span class="name">银行卡号：</span>
+                <span v-text="item.bankno">6228480318401674276</span>
               </p>
               <p>
-                <span class="name">充值时间：</span>
-                <span v-text="item.time">2018-07-08 15:13:14</span>
+                <span class="name">申请时间：</span>
+                <span v-text="item.createtime">2018-07-08 15:13:14</span>
               </p>
               <p>
-                <span class="name">充值金额：</span>
+                <span class="name">金额：</span>
                 <span class="price">￥<i v-text="item.money">1000</i></span>
               </p>
             </div>
           </li>
           </ul>
-      </van-list>
-    </van-pull-refresh>
+    <!--  </van-list>
+    </van-pull-refresh>-->
   </div>
 </template>
 
 <script>
+  import {withdrawalHistroy} from '@/api/my'
   export default {
     name: "WithdrawalRecord",
     data() {
@@ -64,52 +55,25 @@
         loading: false,
         finished: false,
         refreshing: false,
-        list: [
-          {
-            number: '202006292154067460',
-            moneyType: '会员转账',
-            money: '1000',
-            time: '2020-06-29 21:54:06',
-            cardName: '中国农业银行',
-            card: '6228480318401674276',
-            username: '董梦强',
-            state: '已撤销'
-          },
-          {
-            number: '202006292154067460',
-            moneyType: '会员转账',
-            money: '1000',
-            time: '2020-06-29 21:54:06',
-            cardName: '中国农业银行',
-            card: '6228480318401674276',
-            username: '董梦强',
-            state: '已撤销'
-          },
-          {
-            number: '202006292154067460',
-            moneyType: '会员转账',
-            money: '1000',
-            time: '2020-06-29 21:54:06',
-            cardName: '中国农业银行',
-            card: '6228480318401674276',
-            username: '董梦强',
-            state: '已撤销'
-          },
-          {
-            number: '202006292154067460',
-            moneyType: '会员转账',
-            money: '1000',
-            time: '2020-06-29 21:54:06',
-            cardName: '中国农业银行',
-            card: '6228480318401674276',
-            username: '董梦强',
-            state: '已撤销'
-          }
-        ]
+        lists: []
       }
     },
-    methods:{
-      onLoad() {
+      mounted() {
+          this.load()
+      },
+      methods:{
+          load() {
+              this.loading = true
+              let params={
+                  userid:this.$store.getters.userId
+              }
+              withdrawalHistroy(params).then(res => {
+                  if (res.resultCode == 1) {
+                      this.lists = res.resultBody
+                  }
+              })
+          }
+      /*onLoad() {
         setTimeout(() => {
           if (this.refreshing) {
             this.list = [];
@@ -133,7 +97,7 @@
         // 将 loading 设置为 true，表示处于加载状态
         this.loading = false;
         this.onLoad();
-      }
+      }*/
     }
   }
 </script>

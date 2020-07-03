@@ -5,32 +5,32 @@
           <img class="logo" src="@/assets/images/logo.png"/>
           <div class="title-text">
             <p v-text="username">zhongchengming</p>
-            <p class="name">盘口用户名:小小张</p>
+            <p class="name" v-text="this.$store.getters.btbname">盘口用户名:小小张</p>
           </div>
         </div>
     </div>
     <ul class="my-link-list">
       <li>
         <div>
-          <p class="number" v-text="this.$store.state.user.invitationcode">702900</p>
+          <p class="number" v-text="this.$store.getters.invitationcode">702900</p>
           <p>邀请码</p>
         </div>
       </li>
       <li>
         <div>
-          <p class="number">0</p>
+          <p class="number" v-text="this.$store.getters.integral">0</p>
           <p>平台积分</p>
         </div>
       </li>
       <li>
         <div>
-          <p class="number">0</p>
+          <p class="number" v-text="this.$store.getters.btbmoney">0</p>
           <p>盘口余额</p>
         </div>
       </li>
       <li>
         <div>
-          <p class="number">2020.07.01</p>
+          <p class="number" v-text="this.$store.getters.afendtime">2020.07.01</p>
           <p>到期时间</p>
         </div>
       </li>
@@ -73,17 +73,23 @@
       return {
          /* username:'',*/
           lists:[
-              {
+              /*{
                   url:'' ,
                   iconLeftColor:'#62c6f5',
                   name:'智投鼠投注记录',
                   icon:'iconemaxcitygerenxinxitubiaoji03'
-              },
+              },*/
               {
                   url:'/my/integralExchange' ,
                   iconLeftColor:'#c6b909',
                   name:'积分兑换',
                   icon:'icongoumai'
+              },
+              {
+                  url:'/my/integralMoney' ,
+                  iconLeftColor:'#c6b909',
+                  name:'积分充值',
+                  icon:'iconchongzhijilu'
               },
               {
                   url:'/my/money' ,
@@ -103,6 +109,18 @@
                   name:'日志查看',
                   icon:'iconcaozuorizhi'
               },*/
+              {
+                  url:'/my/integralExchangeRecord' ,
+                  iconLeftColor:'#ffa640',
+                  name:'积分兑换记录',
+                  icon:'iconcaozuorizhi'
+              },
+              {
+                  url:'/my/integralMoneyRecord' ,
+                  iconLeftColor:'#ffa640',
+                  name:'积分充值记录',
+                  icon:'iconcaozuorizhi'
+              },
               {
                   url:'/my/moneyRecord' ,
                   iconLeftColor:'#ffa640',
@@ -130,7 +148,7 @@
               {
                   url:'/my/loginPassword' ,
                   iconLeftColor:'#24a7ff',
-                  name:'登录密码',
+                  name:'修改密码',
                   icon:'iconmima'
               },
               {

@@ -8,7 +8,7 @@
     <div class="money-page">
       <ul class="package-list">
         <li v-for="(item,index) in lists" @click="goDetail(item)">
-          <p>包月</p>
+          <p v-text="item.title">包月</p>
           <p v-text="item.money">1000元</p>
         </li>
       </ul>
@@ -114,7 +114,8 @@
         },
         moneyBtn(id){
             let params={
-                userid:this.$store.state.user.userId
+                userid:this.$store.state.user.userId,
+                w_bankid:this.listBank.id
             }
             updateOrderApp(params).then(res => {
                console.log(res)

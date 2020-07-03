@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import {changePwd} from '@/api/my'
     export default {
         name: "LoginPassword",
       data(){
@@ -33,9 +34,14 @@
         }
       },
       methods:{
-        submitBtn() {
-
-        }
+          submitBtn() {
+              let termList = {
+                  oldPassword:this.form.oldPassword,
+                  userid: this.$store.getters.userId,
+                  newPassword:this.form.newPassword
+              }
+              changePwd(termList).then(res => {})
+          }
       }
     }
 </script>

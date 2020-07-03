@@ -7,7 +7,12 @@ const user={
    /* token:'',*/
     userId: '',
     username:'',
-    invitationcode:''
+    invitationcode:'',
+    integral:'',
+    btbname:'',
+    btbmoney:'',
+    afendtime:'',
+    balance:''//余额
   },
   mutations :{
     SET_TOKEN: (state, token) => {
@@ -21,6 +26,21 @@ const user={
     },
     SET_INVITATIONCODE: (state, invitationcode) => {
       state.invitationcode = invitationcode
+    },
+    SET_INTEGRAL: (state, integral) => {
+      state.integral = integral
+    },
+    SET_BTBNAME: (state, btbname) => {
+      state.btbname = btbname
+    },
+    SET_BTMONEY: (state, btbmoney) => {
+      state.btbmoney = btbmoney
+    },
+    SET_AFENDTIME: (state, afendtime) => {
+      state.afendtime = afendtime
+    },
+    SET_BALANCE: (state, balance) => {
+      state.balance = balance
     }
   },
   actions :{
@@ -34,6 +54,11 @@ const user={
             commit('SET_UNSER_ID',data.user.id)
             commit('SET_UNSER_NAME',data.user.username)
             commit('SET_INVITATIONCODE',data.user.invitationcode)
+            commit('SET_INTEGRAL',data.user.integral)
+            commit('SET_BTBNAME',data.user.btbname)
+            commit('SET_BTMONEY',data.user.btbmoney)
+            commit('SET_AFENDTIME',data.user.afendtime)
+            commit('SET_BALANCE',data.user.balance)
           }
           resolve(response)
         }).catch(error=>{
@@ -47,22 +72,19 @@ const user={
         outLogin(dataParm).then(response=>{
           removeToken()
           commit('SET_TOKEN','')
-          commit('SET_UNSER_ID','')
-          commit('SET_UNSER_NAME','')
+         /* commit('SET_UNSER_ID','')*/
+          /*commit('SET_UNSER_NAME','')
           commit('SET_INVITATIONCODE','')
+          commit('SET_INTEGRAL','')
+          commit('SET_BTBNAME','')
+          commit('SET_BTMONEY','')
+          commit('SET_AFENDTIME','')*/
           resolve(response)
         }).catch(error=>{
           reject(error)
         })
       })
-    },
-    /*LogOut({commit,state}){
-      return new Promise(resolve => {
-        commit('SET_TOKEN','')
-        commit('SET_UNSER_ID','')
-        resolve()
-      })
-    }*/
+    }
   }
 }
 export default user
