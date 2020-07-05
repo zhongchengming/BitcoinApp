@@ -81,7 +81,7 @@ a, button, input, textarea {
   font-size: 15px!important;
   color: #fff!important;
 }
-.yd-tabbar{background: #000000cc!important;}
+.yd-tabbar{background: #444!important;}
 .yd-tabbar .yd-tabbar-txt{font-size: 13px;}
 
 /*登录*/

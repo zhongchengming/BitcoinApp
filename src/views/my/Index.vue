@@ -24,13 +24,13 @@
       </li>
       <li>
         <div>
-          <p class="number" v-text="this.$store.getters.btbmoney">0</p>
+          <p class="number" v-text="this.$store.getters.btbmoney?this.$store.getters.btbmoney:'0'">0</p>
           <p>盘口余额</p>
         </div>
       </li>
       <li>
         <div>
-          <p class="number" v-text="this.$store.getters.afendtime">2020.07.01</p>
+          <p class="number" v-text="this.$store.getters.endDay">2020.07.01</p>
           <p>到期时间</p>
         </div>
       </li>
@@ -103,12 +103,12 @@
                   name:'提现',
                   icon:'icontixian1'
               },
-              /*{
+              {
                   url:'/my/integral' ,
                   iconLeftColor:'#ffa640',
                   name:'日志查看',
                   icon:'iconcaozuorizhi'
-              },*/
+              },
               {
                   url:'/my/integralExchangeRecord' ,
                   iconLeftColor:'#ffa640',
@@ -163,12 +163,12 @@
                   name:'我的积分',
                   icon:'icongoumai'
               },
-              {
+             /* {
                   url:'/my/bankMgt' ,
                   iconLeftColor:'#24a7ff',
                   name:'银行卡管理',
                   icon:'iconyinxingqia'
-              }
+              }*/
           ]
       }
     },

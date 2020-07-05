@@ -5,6 +5,8 @@ const getters = {
   integral: state => state.user.integral,
   btbname: state => state.user.btbname,
   btbmoney: state => state.user.btbmoney,
-  afendtime: state => state.user.afendtime
+  afendtime: state => state.user.afendtime,
+  endDay: state => state.user.endDay,
+  btbMoneyList: state => state.user.btbMoneyList
 }
 export default getters
