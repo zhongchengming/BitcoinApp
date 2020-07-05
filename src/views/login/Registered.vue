@@ -1,9 +1,30 @@
 <template>
-  <div>
-    <div class="login-banner">
-      <img src="@/assets/images/logo.png"/>
+  <div class="home-wrap">
+    <div class="lb-canvas-back-wrap">
+      <vue-particles
+        class="lb-canvas-box"
+        color="#9CD9F9"
+        :particleOpacity="0.6"
+        :particlesNumber="280"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="3"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+      >
+      </vue-particles>
     </div>
     <div class="login-box">
+      <div class="login-banner">
+        <img src="@/assets/images/logo.png"/>
+      </div>
       <div class="login-form">
         <ul class="login-list">
           <li>
@@ -21,7 +42,7 @@
           <li>
             <img class="icon" src="@/assets/images/icon_code.png"/>
             <div class="right">
-              <yd-input type="text" class="code" v-model="query.code" placeholder="请输入验证码"></yd-input>
+              <yd-input type="text" v-model="query.code" placeholder="请输入验证码"></yd-input>
               <div class="code-wrap" @click="changeCode()">
                 <identify :identifyCode="identifyCode"></identify>
               </div>
@@ -36,8 +57,6 @@
 </template>
 
 <script>
- /* import api from '@/api'
-  import {mapGetters} from 'vuex'*/
  import identify from "@/components/identify"
  import {register} from '@/api/login'
 
@@ -126,63 +145,25 @@
 </script>
 
 <style scoped>
-  .right {
+  .home-wrap{
+    height: 100%;
+    background: url(/static/images/bg.jpg)no-repeat;
+    background-size: 100% 100%;
     position: relative;
   }
-
-  .sex {
-    width: 100px;
-    font-size: 14px;
-    color: #999;
-  }
-
-  .select-date {
-    position: absolute;
+  .lb-canvas-back-wrap{
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100px;
-    z-index: 1;
-    font-size: 14px;
-    color: #999;
-    height: 19px;
-    line-height: 19px;
-    display: block;
-  }
-
-  .icon-date {
-    position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
-    width: 19px;
-    z-index: 1;
-    height: 19px;
-    line-height: 19px;
-    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
   }
-
-  .hregister-info {
-    padding: 35px 0;
-    font-size: 17px;
-    color: #333;
-    text-align: center;
-  }
-
-  .r-footer-btn {
-    display: flex;
-  }
-
-  .r-footer-btn button {
-    background: #37A6F5;
-    display: inline-block;
-    width: 50%;
-    text-align: center;
-    height: 44px;
-    line-height: 44px;
-    color: #fff;
-  }
-
-  .r-footer-btn .cancel-btn {
-    color: #666;
-    background: #eee;
+  .lb-canvas-back-wrap .lb-canvas-box{
+    height: 100%;
+    width: 100%;
+    opacity: .4;
   }
 </style>

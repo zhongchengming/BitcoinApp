@@ -11,6 +11,8 @@ import 'vant/lib/vant-css/index.css'
 import VueProgressBar from 'vue-progressbar'
 import VueMoment from 'vue-moment'
 import moment from 'moment'
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
 
 import { getToken } from '@/utils/auth'
 router.beforeEach((to, from, next) => {

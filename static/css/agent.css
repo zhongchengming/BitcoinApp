@@ -84,19 +84,23 @@ a, button, input, textarea {
 .yd-tabbar .yd-tabbar-txt{font-size: 13px;}
 
 /*登录*/
+.login-box{
+  position: absolute;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 .login-banner{
   width: 100%;
-  height: 27.9vh;
-  max-height: 206px;
   text-align: center;
-  background: url("../images/banner_agent.png") no-repeat left top;
-  background-size: 100% 100%;
+  margin: 20px 0 30px;
 }
 .login-banner img{
   width: 128px;
-  margin-top: 25px;
 }
-.login-box{margin: -42px 20px 20px;}
 .login-form .login-list{
   border-radius: 5px 5px;
   -webkit-border-radius: 5px 5px;
@@ -144,7 +148,7 @@ a, button, input, textarea {
   color: #999;
 }
 .login-btn{
-  background: #37A6F5;
+  background: #d9534f;
   line-height: 40px;
   height: 40px;
   text-align: center;
@@ -159,8 +163,10 @@ a, button, input, textarea {
 }
 .sign-btn{
   background: transparent;
-  border:1px solid #37A6F5;
-  color:#37A6F5;
+  /*border:1px solid #37A6F5;
+  color:#37A6F5;*/
+  border: 1px solid #d9534f;
+  color: #d9534f;
   margin-top: 15px;
 }
 
