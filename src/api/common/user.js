@@ -7,3 +7,26 @@ export function messagelist() {
     method: 'post'
   })
 }
+
+export function queryArticle(data) {
+  let baseUrl='/other/queryArticle?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}
+export function saveOrUpdateCoin(data) {
+  let baseUrl='/user/saveOrUpdateCoin?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

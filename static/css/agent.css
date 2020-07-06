@@ -83,6 +83,9 @@ a, button, input, textarea {
 }
 .yd-tabbar{background: #444!important;}
 .yd-tabbar .yd-tabbar-txt{font-size: 13px;}
+.yd-tabbar:after{
+  border-top: none!important;
+}
 
 /*登录*/
 .login-box{

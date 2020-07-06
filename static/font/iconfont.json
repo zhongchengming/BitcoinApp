@@ -6,6 +6,20 @@
   "description": "钟成明合作的h5",
   "glyphs": [
     {
+      "icon_id": "9240723",
+      "name": "REX:银联卡结算单退款_48",
+      "font_class": "REXyinliankajiesuandantuikuan_",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "9306315",
+      "name": "银联",
+      "font_class": "yinlian",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
       "icon_id": "10043580",
       "name": "筛选",
       "font_class": "xinbaniconshangchuan-",

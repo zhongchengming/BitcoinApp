@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
+import Trade from '@/views/Trade'
 
 import login from './login'
 import hometab from './hometab'
@@ -12,6 +13,14 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      meta: {
+        title: '首页'
+      }
+    },
+    {
+      path: '/trade',
+      name: 'Trade',
+      component: Trade,
       meta: {
         title: '首页'
       }

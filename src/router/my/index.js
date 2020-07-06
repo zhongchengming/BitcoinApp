@@ -4,6 +4,7 @@ import My from '@/views/my/Index'
 import IntegralExchange from '@/views/my/IntegralExchange'
 import IntegralMoney from '@/views/my/IntegralMoney'
 import Withdrawal from '@/views/my/Withdrawal'
+import TradAmount from '@/views/my/TradAmount'
 import MoneyRecord from '@/views/my/MoneyRecord'
 import IntegralExchangeRecord from '@/views/my/IntegralExchangeRecord'
 import IntegralMoneyRecord from '@/views/my/IntegralMoneyRecord'
@@ -55,6 +56,14 @@ export default [
     component: IntegralMoney,
     meta: {
       title: '积分充值'
+    }
+  },
+  {
+    path: '/my/tradAmount',
+    name: 'TradAmount',
+    component: TradAmount,
+    meta: {
+      title: '日志查看'
     }
   },
   {

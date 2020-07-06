@@ -13,8 +13,14 @@
         <div class="article">
           <h1> 新手指导 </h1>
           <div class="box">
-            <img src="@/assets/images/new_step1.png">
-            <img style="margin-top: 10px;" src="@/assets/images/new_step2.png">
+           <!-- <img src="@/assets/images/new_step1.png">
+            <img style="margin-top: 10px;" src="@/assets/images/new_step2.png">-->
+            <ul class="content">
+              <li v-for="(item,index) in lists" :key="index">
+                <h5 class="title">{{index+1}}、{{item.title}}</h5>
+                <div v-html="item.content"></div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -26,8 +32,29 @@
 </template>
 
 <script>
+    import {queryArticle} from '@/api/common/user'
     export default {
-        name: "About"
+        name: "About",
+        data(){
+            return{
+                lists:[]
+            }
+        },
+        mounted(){
+            this.queryCulture()
+        },
+        methods:{
+            queryCulture(){
+                let params={
+                    type:'002'
+                }
+                queryArticle(params).then(response => {
+                    if (response.resultCode == 1) {
+                        this.lists =response.resultBody
+                    }
+                })
+            }
+        }
     }
 </script>
 
@@ -77,6 +104,12 @@
     margin: 0 auto;
     border-radius: .266667rem;
     box-sizing: border-box;
+    color: #666;
   }
   .about-info .article .box img{width: 100%;}
+  .box .title{
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 10px;
+  }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="page-about white">
     <yd-navbar title="充值" fixed>
-      <router-link to="/" slot="left">
+      <div @click="goback" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
-      </router-link>
+      </div>
     </yd-navbar>
     <div class="money-page">
       <ul class="package-list">
@@ -95,6 +95,9 @@
           this.load()
       },
     methods:{
+        goback(){
+            this.$router.go(-1)
+        },
         load(){
             queryBankList().then(res => {
                 console.log(res.resultBody)

@@ -5,18 +5,35 @@
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
     </yd-navbar>
-    <ul class="money-record">
-      <li class="p-order-item" v-for="item,index in lists" :key="index">
-        <p>
-          <span class="name">兑换多少积分：</span>
-          <span class="price"><i v-text="item.value">1000</i></span>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <div class="container">
+        <p v-if='noData' class="no-data">
+          暂无数据
         </p>
-        <p>
-          <span class="name">兑换时间：</span>
-          <span v-text="item.createtime"></span>
-        </p>
-      </li>
-    </ul>
+        <template v-else>
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了数据了"
+            @load="onLoad"
+          >
+            <ul class="money-record">
+              <li class="p-order-item" v-for="item,index in myList" :key="index">
+                <p>
+                  <span class="name">兑换多少积分：</span>
+                  <span class="price"><i v-text="item.value">1000</i></span>
+                </p>
+                <p>
+                  <span class="name">兑换时间：</span>
+                  <span v-text="item.createtime"></span>
+                </p>
+              </li>
+            </ul>
+          </van-list>
+        </template>
+      </div>
+    </van-pull-refresh>
+
   </div>
 </template>
 
@@ -26,7 +43,12 @@
         name: "WithdrawalRecord",
         data() {
             return {
-                lists: []
+                page: 1,
+                loading: false, // 当loading为true时，转圈圈
+                finished: false, // 数据是否请求结束，结束会先显示- 没有更多了 -
+                myList:[],
+                noData: false, // 如果没有数据，显示暂无数据
+                isLoading:false // 下拉的加载图案
             }
         },
         mounted() {
@@ -34,21 +56,60 @@
         },
         methods:{
             load() {
-                let params={
+                this.loading = true
+                let params = {
                     type:1,
-                    userid:this.$store.getters.userId
+                    userid:this.$store.getters.userId,
+                    pageSize: 10,
+                    pageNumber: this.page
                 }
                 dhHistory(params).then(res => {
                     if (res.resultCode == 1) {
-                        this.lists = res.resultBody
+                        this.loading = false
+                        this.myList = this.myList.concat(res.resultBody)
+                        this.page++
+                        // 如果没有数据，显示暂无数据
+                        if (this.myList.length === 0 && this.page === 1) {
+                            this.noData = true
+                        }
+                        // 如果加载完毕，显示没有更多了
+                        if (res.resultBody.length === 0) {
+                            this.finished = true
+                        }
                     }
                 })
+            },
+            // 列表加载
+            onLoad() {
+                setTimeout(() => {
+                    this.load()
+                    this.loading = true
+                }, 500)
+            },
+            onRefresh() {
+                setTimeout(() => {
+                    // 重新初始化这些属性
+                    this.isLoading = false
+                    this.myList = []
+                    this.page = 1
+                    this.loading = false
+                    this.finished = false
+                    this.noData = false
+                    // 请求信息
+                    this.load()
+                }, 500)
             }
         }
     }
 </script>
 
 <style scoped>
+  .no-data{
+    color: #666;
+    font-size: 20px;
+    margin-top: 70px;
+    text-align: center;
+  }
   .p-order-item {
     padding: 10px 20px;
     background: #fff;

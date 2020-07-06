@@ -103,3 +103,17 @@ export function changePwd(data) {
     data
   })
 }
+
+/*我的积分*/
+
+export function integralHistory(data) {
+  let baseUrl='/other/integralHistory?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

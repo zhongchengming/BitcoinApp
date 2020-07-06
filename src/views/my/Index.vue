@@ -62,6 +62,9 @@
       <yd-tabbar-item title="账户" active link="">
         <yd-icon name="ucenter-outline" slot="icon" size="1.5rem"></yd-icon>
       </yd-tabbar-item>
+      <yd-tabbar-item title="交易" link="/trade">
+        <yd-icon name="discount" slot="icon" size="1.5rem"></yd-icon>
+      </yd-tabbar-item>
     </yd-tabbar>
   </div>
 </template>
@@ -104,10 +107,10 @@
                   icon:'icontixian1'
               },
               {
-                  url:'/my/integral' ,
-                  iconLeftColor:'#ffa640',
-                  name:'日志查看',
-                  icon:'iconcaozuorizhi'
+                  url:'/my/tradAmount' ,
+                  iconLeftColor:'#ff7c81',
+                  name:'交易账户金额',
+                  icon:'iconREXyinliankajiesuandantuikuan_'
               },
               {
                   url:'/my/integralExchangeRecord' ,
