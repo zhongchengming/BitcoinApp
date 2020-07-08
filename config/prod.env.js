@@ -1,5 +1,5 @@
 module.exports = {
   NODE_ENV: '"production"',
   ENV_CONFIG:'"prod"',
-  baseURL: '"/appVersionManageAt"'
+  baseURL: '"http://121.196.122.191:8080/appVersionManageAt"'
 }
