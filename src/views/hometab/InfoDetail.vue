@@ -1,53 +1,48 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="新手指导" fixed>
+    <yd-navbar title="资讯详情" fixed>
       <router-link to="/" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
     </yd-navbar>
-    <div class="about-wrap">
-      <div class="about-info">
-        <div class="logo">
-          <img src="@/assets/images/logo.png">
-        </div>
-        <div class="article">
-          <h1> 新手指导 </h1>
-          <div class="box">
-            <ul class="content">
-              <li v-for="(item,index) in lists" :key="index">
-                <h5 class="title">{{index+1}}、{{item.title}}</h5>
-                <div v-html="item.content"></div>
-              </li>
-            </ul>
-          </div>
+    <div class="about-info">
+      <!--<div class="logo">
+        <img src="@/assets/images/logo.png">
+      </div>-->
+      <div class="article">
+        <h1>{{lists.title}} </h1>
+        <p>{{lists.creattime}}</p>
+        <div class="box" v-html="lists.content">
+
         </div>
       </div>
-      <!--<div class="slogon-footer">
-        <img src="@/assets/images/slogon_blue.png">
-      </div>-->
     </div>
+    <!--<div class="about-wrap">
+
+    </div>-->
   </div>
 </template>
 
 <script>
-    import {queryArticle} from '@/api/common/user'
+    import {queryArticleDeatil} from '@/api/common/user'
     export default {
         name: "About",
         data(){
             return{
-                lists:[]
+                lists:{}
             }
         },
         mounted(){
-            this.queryCulture()
+            this.load()
         },
         methods:{
-            queryCulture(){
+            load(){
                 let params={
-                    type:'002'
+                    articleid:this.$route.query.id
                 }
-                queryArticle(params).then(response => {
+                queryArticleDeatil(params).then(response => {
                     if (response.resultCode == 1) {
+                        console.log(response)
                         this.lists =response.resultBody
                     }
                 })
@@ -57,19 +52,19 @@
 </script>
 
 <style scoped>
-  .about-wrap{
-    height: 100%;
-    background: url("/static/images/bg_guide.jpg") no-repeat center center;
-    background-size:100% 100%;
+  .page-about{
+    min-height: 100%;
     box-sizing: border-box;
+    background: url(/static/images/bg_about.png)no-repeat;
+    background-size: 100% 100%;
   }
   .about-info{
+    background: url(/static/images/bg_about.png)no-repeat;
+    background-size: 100% 100%;
     width: 100%;
-    padding: 15px;
-  }
-  .about-info .logo{text-align: right;}
-  .about-info .logo img{
-    width: 33%;
+    padding:15px;
+    box-sizing: border-box;
+    min-height: 100%;
   }
   .about-info .article {
     min-height:360px;
@@ -81,10 +76,10 @@
   }
   .about-info .article h1{
     margin: 15px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
   }
-  .about-info .article h1:before {
+ /* .about-info .article h1:before {
     content: "";
     background: #56b3f6;
     display: inline-block;
@@ -93,7 +88,7 @@
     width: 4px;
     border-radius: 3px;
     margin-right: 3px;
-  }
+  }*/
   .about-info .article .box{
     text-align: left;
     padding: 15px;

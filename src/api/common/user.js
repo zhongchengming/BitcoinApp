@@ -30,3 +30,15 @@ export function saveOrUpdateCoin(data) {
     data
   })
 }
+/*获取文章详情*/
+export function queryArticleDeatil(data) {
+  let baseUrl='/other/queryArticleDeatil?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

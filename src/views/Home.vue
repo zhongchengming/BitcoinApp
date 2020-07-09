@@ -37,7 +37,7 @@
       <li>
         <router-link to="/about">
           <div class="wrap"><i class="icon iconfont iconjieshao"></i></div>
-          <p>智投鼠介绍</p>
+          <p>智投魔方介绍</p>
         </router-link>
       </li>
       <li>
@@ -60,9 +60,9 @@
       </li>
     </ul>
     <div class="culture-box">
-      <h3 class="title">企业文化</h3>
+      <h3 class="title">科技资讯</h3>
       <ul class="culture-list">
-        <li v-for="(item,index) in cultureLists" :key="index">
+        <li v-for="(item,index) in cultureLists" :key="index" @click="goDetail(item)">
           <img src="@/assets/images/test_img1.png">
           <div class="bottom">
             <p v-text="item.title">对客户诚信不做伤害</p>
@@ -70,41 +70,6 @@
             <!--<div v-html="item.content">客户利益的事情</div>-->
           </div>
         </li>
-        <!--<li>
-          <img src="@/assets/images/test_img2.png">
-          <div class="bottom">
-            <p>有巩固的专业事项</p>
-            <p>热爱本职工作，尽职守</p>
-          </div>
-        </li>
-        <li>
-          <img src="@/assets/images/test_img3.png">
-          <div class="bottom">
-            <p>对待工作，全身心提升</p>
-            <p>全身心投入对待客户</p>
-          </div>
-        </li>
-        <li>
-          <img src="@/assets/images/test_img4.png">
-          <div class="bottom">
-            <p>不墨守成规</p>
-            <p>自我突破逆境求生存</p>
-          </div>
-        </li>
-        <li>
-          <img src="@/assets/images/test_img5.png">
-          <div class="bottom">
-            <p>笨人先起身</p>
-            <p>笨鸟早出林</p>
-          </div>
-        </li>
-        <li>
-          <img src="@/assets/images/test_img6.png">
-          <div class="bottom">
-            <p>三人行，必有我师</p>
-            <p>习补自己短板</p>
-          </div>
-        </li>-->
       </ul>
     </div>
     <yd-tabbar fixed active-color="#56b3f6">
@@ -125,7 +90,7 @@
 </template>
 
 <script>
-    import {messagelist, queryArticle} from '@/api/common/user'
+    import {queryArticle} from '@/api/common/user'
 
     export default {
         name: "home",
@@ -144,24 +109,11 @@
             }
         },
         mounted() {
-            this.load()
             this.queryCulture()
         },
         methods: {
             goMy() {
                 this.$router.push('/my')
-            },
-            load() {
-                messagelist().then(response => {
-                    console.log(response)
-                    this.lists = response.resultBody
-                    for (let i in this.lists) {
-                        this.$dialog.toast({
-                            mes: this.lists[i]
-                        })
-                        console.log(this.lists[i])
-                    }
-                })
             },
             queryCulture() {
                 let params = {
@@ -173,6 +125,15 @@
                         this.cultureLists = response.resultBody
                     }
                 })
+            },
+            goDetail(item){
+                console.log(item)
+                this.$router.push({
+                    path: '/infoDetail',
+                    query: {
+                        id: item.id
+                    }
+                })
             }
         }
     }
@@ -181,6 +142,10 @@
 <style scoped>
   .page-home {
     padding-bottom: 60px;
+    min-height: 100%;
+    box-sizing: border-box;
+    background: url(/static/images/bg_home.png)no-repeat;
+    background-size: 100% 100%;
   }
 
   .page-home .header {
@@ -213,7 +178,7 @@
     width: 100%;
     box-sizing: border-box;
     font-size: 13px;
-    color: #333;
+    color: #fff;
   }
 
   .notice {
@@ -315,7 +280,7 @@
     /* margin: 15px;*/
     margin-bottom: 12px;
     font-size: 16px;
-    color: #333;
+    color: #fff;
     font-weight: bold;
   }
 

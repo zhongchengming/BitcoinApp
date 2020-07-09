@@ -35,6 +35,13 @@
           <button class="login-btn" @click="bindBtn()">立即绑定</button>
         </div>
       </div>
+      <yd-popup v-model="fitterPopup" position="center" width="50%">
+        <div class="fitter-popup-box">
+<!--          <p v-for="(item,index) in lists">-->
+            {{item}}
+<!--          </p>-->
+        </div>
+      </yd-popup>
       <yd-tabbar fixed active-color="#56b3f6">
         <yd-tabbar-item title="首页" link="/" >
           <yd-icon name="home" slot="icon" size="1.5rem"></yd-icon>
@@ -53,7 +60,7 @@
 </template>
 
 <script>
-    import {saveOrUpdateCoin} from '@/api/common/user'
+    import {messagelist, saveOrUpdateCoin} from '@/api/common/user'
     export default {
         name: "trade",
         data() {
@@ -61,9 +68,40 @@
                 query: {
                     username: '',
                 },
+                fitterPopup:false,
+                lists:[],
+                item:"",
             }
         },
+        /*mounted() {
+            this.load()
+        },*/
         methods: {
+            load() {
+                messagelist().then(response => {
+                    let datalist=response.resultBody
+                    let dataArr= []
+                    this.fitterPopup = true
+
+                      for (let i = 0; i < datalist.length; i++) {
+                          // dataArr.push(datalist[i])
+
+                          setTimeout(function(){
+                              this.item+= datalist[i];
+                          },1000);
+
+                      }
+
+
+                    console.log(this.item)
+                    /* this.fitterPopup = false*/
+                })
+            },
+            timeOut(){
+                setInterval(()=>{
+                    console.log(123)
+                },5000)
+            },
             bindBtn() {
                 if (!this.query.username) {
                     this.$dialog.toast({
@@ -89,18 +127,20 @@
 <style scoped>
   .home-wrap{
     height: 100%;
-    background: url(/static/images/bg.jpg)no-repeat;
-    background-size: 100% 100%;
+    background: url("/static/images/bg_my_index.jpg") no-repeat;
+    background-size:100% 100%;
     position: relative;
-    /*background: linear-gradient(top, #37A6F5, #8DCDFA);
-    background: -webkit-linear-gradient(top, #37A6F5, #8DCDFA);
-    background: -o-linear-gradient(top, #37A6F5, #8DCDFA);
-    background: -moz-linear-gradient(top, #37A6F5, #8DCDFA);*/
     display: flex;
     align-items: center;
   }
   .login-box{
     margin-top: 100px;
     height: 400px;
+  }
+  .fitter-popup-box{
+    width: 100%;
+    background: #fff;
+    padding: 50px;
+    border-radius: 4px;
   }
 </style>

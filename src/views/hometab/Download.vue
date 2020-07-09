@@ -21,9 +21,6 @@
           </div>
         </div>
       </main>
-      <div  class="slogon-footer" style="margin-top: 40px;">
-        <img src="@/assets/images/slogon_blue.png">
-      </div>
     </div>
   </div>
 </template>
@@ -37,8 +34,9 @@
 <style scoped>
   .download-page {
     height: 100%;
-    background: url(/static/images/download_bg.png) no-repeat;
-    background-size: 100% 100%;
+    background: url("/static/images/bg_download.png") no-repeat;
+    background-size:100% 100%;
+    box-sizing: border-box;
     text-align: center;
   }
   .mainbody{
