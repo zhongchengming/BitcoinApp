@@ -2,6 +2,7 @@ import About from '@/views/hometab/About'
 import Guide from '@/views/hometab/Guide'
 import Service from '@/views/hometab/Service'
 import Download from '@/views/hometab/Download'
+import InfoDetail from '@/views/hometab/InfoDetail'
 
 export default [
   {
@@ -33,6 +34,13 @@ export default [
     component:Service,
     meta: {
       title: '在线客服'
+    }
+  },{
+    path: '/infoDetail',
+    name: 'InfoDetail',
+    component:InfoDetail,
+    meta: {
+      title: '资讯详情'
     }
   }
 ]

@@ -50,6 +50,35 @@ service.interceptors.response.use(
           Toast({ mes: response.data.resultMsg})
         }
         return response.data
+      }else if(response.resultCode===2){
+        /*token失效，重新登录*/
+        let params={
+          userid:this.$store.state.user.userId,
+          token:this.$store.state.user.token
+        }
+        this.$dialog.confirm({
+          title: '登录已超时，请重新登录！',
+          opts: [
+            {
+              txt: '取消',
+              color: false,
+              callback: () => {
+                this.$dialog.toast({mes: '已取消', timeout: 1000});
+              }
+            },
+            {
+              txt: '确定',
+              color: true,
+              callback: () => {
+                this.$store.dispatch('LogOut',params).then(()=>{
+                  /* this.$router.push('/login')*/
+                  location.reload()
+                })
+
+              }
+            }
+          ],
+        });
       }else{
         //出现业务异常
         Toast({ mes: response.data.resultMsg || '出错了' })
@@ -61,34 +90,10 @@ service.interceptors.response.use(
       Toast({ mes: response.data.resultMsg || '出错了' })
       return Promise.reject(response.data)
     }
-    // if the custom code is not 20000, it is judged as an error.
-    /* if (res.code !== 20000) {
-         Message({
-             message: res.message || 'Error',
-             type: 'error',
-             duration: 5 * 1000
-         })
-
-         // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-         if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-             // to re-login
-             MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-                 confirmButtonText: 'Re-Login',
-                 cancelButtonText: 'Cancel',
-                 type: 'warning'
-             }).then(() => {
-                 store.dispatch('user/resetToken').then(() => {
-                     location.reload()
-                 })
-             })
-         }
-         return Promise.reject(new Error(res.message || 'Error'))
-     } else {
-         return res
-     }*/
   },
   error => {
     console.log('err' + error) // for debug
+    console.log(error.response)
     Toast({ mes: error.message})
     return Promise.reject(error)
   }

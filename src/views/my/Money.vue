@@ -161,6 +161,12 @@
 </script>
 
 <style scoped>
+  .page-about{
+    height: 100%;
+    background: url("/static/images/bg_money.png") no-repeat;
+    background-size:100% 100%;
+    box-sizing: border-box;
+  }
   .money-page {
     padding: 20px;
   }
@@ -187,7 +193,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: #333;
+    color: #fff;
   }
 
   .money-list .item .title .left {
@@ -217,7 +223,7 @@
     display: flex;
     align-items: center;
     font-size: 12px;
-    color: #666;
+    color: #fff;
     margin-bottom: 5px;
   }
   .item-text .bank-text{margin: 0 5px;}

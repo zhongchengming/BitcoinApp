@@ -49,9 +49,9 @@
     <div class="logout-btn">
        <button  @click="logout()">退出登录</button>
     </div>
-    <div class="slogon-footer">
+    <!--<div class="slogon-footer">
       <img src="@/assets/images/slogon_blue.png">
-    </div>
+    </div>-->
     <yd-tabbar fixed active-color="#56b3f6">
       <yd-tabbar-item title="首页" link="/">
         <yd-icon name="home" slot="icon" size="1.5rem"></yd-icon>
@@ -223,16 +223,22 @@
 </script>
 
 <style scoped>
+  .bottom-distance{
+    min-height: 100%;
+    background: url("/static/images/bg_my_index.jpg") no-repeat;
+    background-size:100% 100%;
+    box-sizing: border-box;
+  }
   .my-top {
     height: 100px;
     /*background:url("/static/images/banner_agent.png") no-repeat center center;*/
     background-size: cover;
     width: 100%;
     box-sizing: border-box;
-    background: linear-gradient(top, #37A6F5, #8DCDFA);
+   /* background: linear-gradient(top, #37A6F5, #8DCDFA);
     background: -webkit-linear-gradient(top, #37A6F5, #8DCDFA);
     background: -o-linear-gradient(top, #37A6F5, #8DCDFA);
-    background: -moz-linear-gradient(top, #37A6F5, #8DCDFA);
+    background: -moz-linear-gradient(top, #37A6F5, #8DCDFA);*/
   }
   .title-box-wrap{
     display: flex;
@@ -240,7 +246,7 @@
     /*justify-content: center;*/
     text-align: center;
     padding: 12px 20px;
-    color: #333;
+    color: #fff;
     font-size: 16px;
     height: 100%;
     font-weight: bold;
@@ -267,7 +273,7 @@
   .my-list{
     margin: 10px 0;
    /* border-radius: 6px;*/
-    background: #fff;
+    /*background: #fff;*/
   }
   .my-list ul li{
     display: flex;
@@ -281,7 +287,7 @@
   }
   .my-list li .name{
     font-size: 14px;
-    color: #333;
+    color: #fff;
     flex: 1;
     margin: 0 7px;
   }
