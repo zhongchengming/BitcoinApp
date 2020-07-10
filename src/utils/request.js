@@ -45,6 +45,7 @@ service.interceptors.response.use(
     //const res = response.data
     const code = response.status
     if(code===200){
+     /* console.log(response)*/
       if (response.data && response.data.resultCode===1){
         if(response.data.resultMsg){
           Toast({ mes: response.data.resultMsg})

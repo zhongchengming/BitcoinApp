@@ -8,6 +8,7 @@ const getters = {
   btbmoney: state => state.user.btbmoney,
   afendtime: state => state.user.afendtime,
   endDay: state => state.user.endDay,
-  btbMoneyList: state => state.user.btbMoneyList
+  btbMoneyList: state => state.user.btbMoneyListcommit,
+  isbind: state => state.user.isbind
 }
 export default getters

@@ -14,7 +14,8 @@ const user = {
     afendtime: '',
     balance: '',//余额
     btbMoneyList: [],//日志记录
-    endDay: ''//过期时间
+    endDay: '',//过期时间
+    isbind:''//是否绑定
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -49,6 +50,9 @@ const user = {
     },
     SET_BTB_MONEY_LIST: (state, btbMoneyList) => {
       state.btbMoneyList = btbMoneyList
+    },
+    SET_ISBIND: (state, isbind) => {
+      state.isbind = isbind
     }
   },
   actions: {
@@ -69,6 +73,7 @@ const user = {
             commit('SET_BALANCE', data.user.balance)
             commit('SET_END_DAY', data.endDay)
             commit('SET_BTB_MONEY_LIST', data.btbMoneyList)
+            commit('SET_ISBIND', data.isbind)
           }
           resolve(response)
         }).catch(error => {
@@ -91,11 +96,15 @@ const user = {
           commit('SET_AFENDTIME','')
           commit('SET_END_DAY', '')
           commit('SET_BTB_MONEY_LIST', [])
+          commit('SET_ISBIND', '')
           resolve(response)
         }).catch(error => {
           reject(error)
         })
       })
+    },
+    async GetIsBind({conmit},key){
+      commit('SET_ISBIND', key)
     }
   }
 }
