@@ -117,3 +117,16 @@ export function integralHistory(data) {
     data
   })
 }
+
+/*交易账户金额*/
+export function queryCoin(data) {
+  let baseUrl='/user/queryCoin?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

@@ -1,29 +1,24 @@
 <template>
   <div class="page-about">
-    <yd-navbar title="资讯详情" fixed>
+    <yd-navbar title="公告详情" fixed>
       <router-link to="/" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
     </yd-navbar>
     <div class="about-info">
-      <!--<div class="logo">
-        <img src="@/assets/images/logo.png">
-      </div>-->
       <div class="article">
         <h1>{{lists.title}} </h1>
         <p>{{lists.creattime}}</p>
-        <div class="box" v-html="lists.content">
-
-        </div>
+        <div class="box" v-html="lists.content"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-    import {queryArticleDeatil} from '@/api/common/user'
+    import {noticeArticle} from '@/api/common/user'
     export default {
-        name: "About",
+        name: "NoticeDetail",
         data(){
             return{
                 lists:{}
@@ -34,13 +29,12 @@
         },
         methods:{
             load(){
-                let params={
-                    articleid:this.$route.query.id
+                let params = {
+                    type: '001'
                 }
-                queryArticleDeatil(params).then(response => {
+                noticeArticle(params).then(response => {
                     if (response.resultCode == 1) {
-                        console.log(response)
-                        this.lists =response.resultBody
+                        this.lists = response.resultBody[0]
                     }
                 })
             }
@@ -76,16 +70,6 @@
     font-size: 14px;
     font-weight: bold;
   }
- /* .about-info .article h1:before {
-    content: "";
-    background: #56b3f6;
-    display: inline-block;
-    vertical-align: middle;
-    height: 10px;
-    width: 4px;
-    border-radius: 3px;
-    margin-right: 3px;
-  }*/
   .about-info .article .box{
     text-align: left;
     padding: 15px;

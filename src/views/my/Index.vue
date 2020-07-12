@@ -82,12 +82,12 @@
                   name:'智投鼠投注记录',
                   icon:'iconemaxcitygerenxinxitubiaoji03'
               },*/
-              {
+              /*{
                   url:'/my/integralExchange' ,
                   iconLeftColor:'#c6b909',
                   name:'积分兑换',
                   icon:'icongoumai'
-              },
+              },*/
               {
                   url:'/my/integralMoney' ,
                   iconLeftColor:'#c6b909',
@@ -112,12 +112,12 @@
                   name:'交易账户金额',
                   icon:'iconREXyinliankajiesuandantuikuan_'
               },
-              {
+             /* {
                   url:'/my/integralExchangeRecord' ,
                   iconLeftColor:'#ffa640',
                   name:'积分兑换记录',
                   icon:'iconcaozuorizhi'
-              },
+              },*/
               {
                   url:'/my/integralMoneyRecord' ,
                   iconLeftColor:'#ffa640',

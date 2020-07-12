@@ -7,7 +7,7 @@
     </yd-navbar>
     <div class="money-page">
       <ul class="package-list">
-        <li v-for="(item,index) in lists" @click="goDetail(item)">
+        <li v-for="(item,index) in lists" @click="goDetail(item,index)" :class="{active:checkIndex == index}">
           <p v-text="item.title">包月</p>
           <p v-text="item.money">1000元</p>
         </li>
@@ -72,7 +72,6 @@
     </div>
   </div>
 </template>
-
 <script>
    import {queryBankList,updateOrderApp} from '@/api/my'
   import Clipboard from 'clipboard'
@@ -88,9 +87,15 @@
           money:'',
             id:''
         },
-         lists:[]
+         lists:[],
+          checkIndex:'',
       }
     },
+      computed:{
+          resultNum(){
+              return this.num;
+          }
+      },
       mounted() {
           this.load()
       },
@@ -100,19 +105,21 @@
         },
         load(){
             queryBankList().then(res => {
-                console.log(res.resultBody)
                 if (res.resultCode == 1) {
-                    this.lists = res.resultBody
-                    this.listBank=res.resultBody[0]
+                    if(res.resultBody!=null){
+                        this.lists = res.resultBody
+                        this.listBank=res.resultBody[0]
+                    }
                 }
             })
         },
-        goDetail(item){
+        goDetail(item,index){
             console.log(item)
-             this.listBank.bankname=item.bankname,
-              this.listBank.bankcno=item.bankcno,
-              this.listBank.name=item.name,
-              this.listBank.money=item.money,
+            this.checkIndex = index
+             this.listBank.bankname=item.bankname
+              this.listBank.bankcno=item.bankcno
+              this.listBank.name=item.name
+              this.listBank.money=item.money
               this.listBank.id=item.id
         },
         moneyBtn(id){
@@ -214,7 +221,7 @@
   }
 
   .money-list .arrow {
-    color: #999;
+    color: #fff;
   }
   .back-detail-box{
     padding: 12px 0;
@@ -227,6 +234,9 @@
     margin-bottom: 5px;
   }
   .item-text .bank-text{margin: 0 5px;}
+  .active{
+    background-color: aqua;
+  }
   .copy-btn{color: #24a7ff;}
   .btn-blue{
     display: inline-block;

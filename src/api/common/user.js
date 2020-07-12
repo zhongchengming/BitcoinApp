@@ -7,7 +7,18 @@ export function messagelist() {
     method: 'post'
   })
 }
-
+/*公告*/
+export function noticeArticle(data) {
+  let baseUrl='/other/queryArticle?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}
 export function queryArticle(data) {
   let baseUrl='/other/queryArticle?'
   for(var i in data){

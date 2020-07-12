@@ -7,9 +7,7 @@
     </yd-navbar>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <div class="container">
-        <p v-if='noData' class="no-data">
-          暂无数据
-        </p>
+        <p v-if="noData" class="no-data">暂无数据</p>
         <template v-else>
           <van-list
             v-model="loading"
@@ -74,22 +72,22 @@
           load() {
               this.loading = true
               let params = {
-                  type:1,
                   userid:this.$store.getters.userId,
                   pageSize: 10,
                   pageNumber: this.page
               }
               withdrawalHistroy(params).then(res => {
+                  let dataArr=res.resultBody.list
                   if (res.resultCode == 1) {
                       this.loading = false
-                      this.myList = this.myList.concat(res.resultBody)
+                      this.myList = this.myList.concat(dataArr)
                       this.page++
                       // 如果没有数据，显示暂无数据
-                      if (this.myList.length === 0 && this.page === 1) {
+                      if (this.myList.length === 0) {
                           this.noData = true
                       }
                       // 如果加载完毕，显示没有更多了
-                      if (res.resultBody.length === 0) {
+                      if (dataArr.length === 0) {
                           this.finished = true
                       }
                   }

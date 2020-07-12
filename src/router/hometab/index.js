@@ -3,6 +3,7 @@ import Guide from '@/views/hometab/Guide'
 import Service from '@/views/hometab/Service'
 import Download from '@/views/hometab/Download'
 import InfoDetail from '@/views/hometab/InfoDetail'
+import NoticeDetail from '@/views/hometab/NoticeDetail'
 
 export default [
   {
@@ -41,6 +42,13 @@ export default [
     component:InfoDetail,
     meta: {
       title: '资讯详情'
+    }
+  },{
+    path: '/noticeDetail',
+    name: 'NoticeDetail',
+    component:NoticeDetail,
+    meta: {
+      title: '公告详情'
     }
   }
 ]

@@ -1,6 +1,6 @@
 import axios from 'axios'
 /*import { MessageBox, Message,Notification } from 'element-ui'*/
-import { Toast} from 'vue-ydui/dist/lib.rem/dialog';
+import { Toast,Confirm} from 'vue-ydui/dist/lib.rem/dialog';
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -42,44 +42,40 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    //const res = response.data
+    let codeState = response.data
     const code = response.status
     if(code===200){
-     /* console.log(response)*/
       if (response.data && response.data.resultCode===1){
         if(response.data.resultMsg){
           Toast({ mes: response.data.resultMsg})
         }
         return response.data
-      }else if(response.resultCode===2){
+      }else if(codeState.resultCode===2){
         /*token失效，重新登录*/
         let params={
-          userid:this.$store.state.user.userId,
-          token:this.$store.state.user.token
+          userid:'',
+          token:''
         }
-        this.$dialog.confirm({
-          title: '登录已超时，请重新登录！',
+
+        Confirm({
+          title: '登录超时，请重新登录！',
           opts: [
-            {
-              txt: '取消',
-              color: false,
-              callback: () => {
-                this.$dialog.toast({mes: '已取消', timeout: 1000});
-              }
-            },
             {
               txt: '确定',
               color: true,
               callback: () => {
-                this.$store.dispatch('LogOut',params).then(()=>{
+                //location.reload()
+                console.log('111')
+               /* this.$router.push({path:'/login'})*/
+                store.dispatch('LogOut',params).then(()=>{
                   /* this.$router.push('/login')*/
                   location.reload()
                 })
-
               }
             }
-          ],
-        });
+          ]
+        })
+        return response.data
       }else{
         //出现业务异常
         Toast({ mes: response.data.resultMsg || '出错了' })

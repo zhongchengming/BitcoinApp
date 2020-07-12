@@ -21,15 +21,17 @@
         </yd-slider-item>
       </yd-slider>
     </div>
-    <div class="notice-box">
+    <div class="notice-box" @click="goNoticeDetail">
       <div class="notice">
         <img src="@/assets/images/icon_notic.png"/>
-        智投鼠公告：
+        智投魔法公告：
       </div>
       <div class="notice-info">
-        <div class="text">尊敬的智投鼠用户: 因银行转账需要银行详细的开户网点，
-          请广大用户在提现时填写开户支行的具体信息。
-          避免您的积分提现无法到账。感谢您对智投鼠的支持!2020年6月29日
+        <div class="text">
+          <!--<p>尊敬的智投鼠用户: 因银行转账需要银行详细的开户网点，</p>
+          <div>请广大用户在提现时填写开户支行的具体信息。</div>
+          <p>避免您的积分提现无法到账。感谢您对智投鼠的支持!2020年6月29日</p>-->
+          {{noticeContent}}
         </div>
       </div>
     </div>
@@ -67,7 +69,6 @@
           <div class="bottom">
             <p v-text="item.title">对客户诚信不做伤害</p>
             <p class="time" v-text="item.creattime"></p>
-            <!--<div v-html="item.content">客户利益的事情</div>-->
           </div>
         </li>
       </ul>
@@ -90,30 +91,37 @@
 </template>
 
 <script>
-    import {queryArticle} from '@/api/common/user'
+    import {noticeArticle,queryArticle} from '@/api/common/user'
 
     export default {
         name: "home",
         data() {
             return {
-                /*lists: [
-                    "加载脚本...",
-                    "连接bite平台..",
-                    "嵌入脚本...",
-                    "加载数据..",
-                    "绑定数据....",
-                    "设置成功...."
-                ]*/
+                noticeContent:'',
                 lists: [],
                 cultureLists: []
             }
         },
         mounted() {
+            this.queryNotice()
             this.queryCulture()
         },
         methods: {
             goMy() {
                 this.$router.push('/my')
+            },
+            goNoticeDetail(){
+                this.$router.push('/noticeDetail')
+            },
+            queryNotice() {
+                let params = {
+                    type: '001'
+                }
+                noticeArticle(params).then(response => {
+                    if (response.resultCode == 1) {
+                        this.noticeContent = response.resultBody[0].title
+                    }
+                })
             },
             queryCulture() {
                 let params = {
@@ -195,6 +203,7 @@
   .notice-info {
     flex: 1;
     overflow: hidden;
+    margin-left: 14px;
   }
 
   .notice-info .text {
@@ -227,11 +236,11 @@
   }
 
   .router-tab {
-    background: #fff;
+   /* background: #fff;*/
     display: flex;
     justify-content: space-around;
     font-size: 14px;
-    color: #333;
+    color: #fff;
     text-align: center;
     padding: 15px 0;
   }
@@ -285,17 +294,17 @@
   }
 
   .culture-list {
-    padding: 0 15px;
+   /* padding: 0 15px;*/
     width: 100%;
     box-sizing: border-box;
     border-radius: 10px;
-    background: #fff;
+    /*background: #fff;*/
   }
 
   .culture-list li {
     padding: 10px;
     font-size: 14px;
-    color: #333;
+    color: #fff;
     display: flex;
     align-items: center;
   }

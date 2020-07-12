@@ -6,6 +6,27 @@
   "description": "钟成明合作的h5",
   "glyphs": [
     {
+      "icon_id": "6629810",
+      "name": "下拉",
+      "font_class": "xiala-",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "734314",
+      "name": "支付宝支付",
+      "font_class": "zhifubaozhifu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "9306311",
+      "name": "微信支付",
+      "font_class": "weixinzhifu",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
       "icon_id": "9240723",
       "name": "REX:银联卡结算单退款_48",
       "font_class": "REXyinliankajiesuandantuikuan_",

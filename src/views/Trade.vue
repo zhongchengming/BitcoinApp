@@ -37,6 +37,10 @@
             <img class="icon" src="@/assets/images/icon_tel.png"/>
             <yd-input v-model="query.username" placeholder="请输入手机号或者邮箱"></yd-input>
           </li>
+          <li>
+            <img class="icon" src="@/assets/images/icon_password.png"/>
+            <yd-input type="password" v-model="query.password" placeholder="请输入密码"></yd-input>
+          </li>
         </ul>
         <button class="login-btn" @click="bindBtn()">立即绑定</button>
       </div>
@@ -76,6 +80,7 @@
         isBindText:this.$store.getters.isbind,
         query: {
           username: '',
+          password:''
         },
         fitterPopup: false,
         lists: [],
@@ -112,6 +117,12 @@
           })
           return
         }
+          if (!this.query.password) {
+              this.$dialog.toast({
+                  mes: '请输入密码'
+              })
+              return
+          }
         /*this.$dialog.loading.open('绑定中...');*/
         let params = {
           username: this.query.username,
@@ -131,7 +142,7 @@
 <style scoped>
   .home-wrap {
     height: 100%;
-    background: url("/static/images/bg_my_index.jpg") no-repeat;
+    background: url("/static/images/bg_trade.png") no-repeat;
     background-size: 100% 100%;
     position: relative;
     display: flex;

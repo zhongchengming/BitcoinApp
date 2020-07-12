@@ -48,8 +48,9 @@
     margin: 40px auto 0;
     font-size: 16px;
     border-radius: 6px;
-    color: #56b3f6;
-    border: 1px solid #56b3f6;
+    color: #fff;
+    border: 1px solid #fff;
+    border-bottom: 2px solid #fff;
   }
   .app-link-item{
     display: flex;

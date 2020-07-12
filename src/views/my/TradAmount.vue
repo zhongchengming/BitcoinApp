@@ -32,11 +32,12 @@
 </template>
 
 <script>
+    import {queryCoin} from '@/api/my'
     export default {
         name: "MoneyRecord",
         data() {
             return {
-                myList: this.$store.getters.btbMoneyList,
+                myList: this.$store.getters.userId,
             }
         },
     }

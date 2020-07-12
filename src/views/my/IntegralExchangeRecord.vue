@@ -7,9 +7,7 @@
     </yd-navbar>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <div class="container">
-        <p v-if='noData' class="no-data">
-          暂无数据
-        </p>
+        <p v-if="noData" class="no-data">暂无数据</p>
         <template v-else>
           <van-list
             v-model="loading"
@@ -69,7 +67,7 @@
                         this.myList = this.myList.concat(res.resultBody)
                         this.page++
                         // 如果没有数据，显示暂无数据
-                        if (this.myList.length === 0 && this.page === 1) {
+                        if (this.myList.length === 0) {
                             this.noData = true
                         }
                         // 如果加载完毕，显示没有更多了
