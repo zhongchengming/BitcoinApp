@@ -7,9 +7,9 @@
     </yd-navbar>
     <div class="about-wrap">
       <div class="about-info">
-        <div class="logo">
+       <!-- <div class="logo">
           <img src="@/assets/images/logo.png">
-        </div>
+        </div>-->
         <div class="article">
           <h1> 新手指导 </h1>
           <div class="box">

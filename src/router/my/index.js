@@ -63,7 +63,7 @@ export default [
     name: 'TradAmount',
     component: TradAmount,
     meta: {
-      title: '日志查看'
+      title: '交易账户金额'
     }
   },
   {

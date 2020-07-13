@@ -193,13 +193,13 @@
         this.$dialog.confirm({
           title: '确定要退出吗？',
           opts: [
-            {
+           /* {
               txt: '取消',
               color: false,
               callback: () => {
                 this.$dialog.toast({mes: '已取消', timeout: 1000});
               }
-            },
+            },*/
             {
               txt: '确定',
               color: true,
@@ -223,9 +223,12 @@
 </script>
 
 <style scoped>
+  /deep/.yd-confirm-hd{
+    text-align: center!important;
+  }
   .bottom-distance{
     min-height: 100%;
-    background: url("/static/images/bg_my_index.jpg") no-repeat;
+    background: url("/static/images/bg_home.png") no-repeat;
     background-size:100% 100%;
     box-sizing: border-box;
   }
@@ -250,6 +253,7 @@
     font-size: 16px;
     height: 100%;
     font-weight: bold;
+    border-bottom: 1px solid #444;
   }
   .title-box-wrap .logo {width: 80px;margin-right: 20px;}
   .title-box-wrap .title-text{text-align: left;}
@@ -257,16 +261,18 @@
   .my-link-list{
     display: flex;
     margin-bottom: 10px;
-    background: #fff;
+   /* background: #fff;*/
    /* border-radius: 6px;*/
-    height: 70px;}
+    height: 70px;
+    border-bottom: 1px solid #444;
+  }
   .my-link-list li{
     flex-basis: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #666;
+    color: #999;
     font-size: 12px;
   }
   .my-link-list li .number{color: #56b3f6;margin-bottom: 3px;}
@@ -280,19 +286,19 @@
     align-items: center;
     height: 44px;
     margin:0 20px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #333;
   }
-  .my-list ul /deep/a:last-child li{
+ /* .my-list ul /deep/a:last-child li{
     border-bottom: 0;
-  }
+  }*/
   .my-list li .name{
     font-size: 14px;
-    color: #fff;
+    color: #999;
     flex: 1;
     margin: 0 7px;
   }
   .my-list li .icon{font-size: 20px;}
-  .my-list li .iconiconfontjiantou5{font-size: 16px;color: #999;}
+  .my-list li .iconiconfontjiantou5{font-size: 16px;color: #666;}
   .logout-btn{
     padding: 15px 10px 5px;
   }

@@ -24,7 +24,7 @@
     <div class="notice-box" @click="goNoticeDetail">
       <div class="notice">
         <img src="@/assets/images/icon_notic.png"/>
-        智投魔法公告：
+        智投魔方公告：
       </div>
       <div class="notice-info">
         <div class="text">
@@ -65,7 +65,8 @@
       <h3 class="title">科技资讯</h3>
       <ul class="culture-list">
         <li v-for="(item,index) in cultureLists" :key="index" @click="goDetail(item)">
-          <img src="@/assets/images/test_img1.png">
+          <!--<img src="@/assets/images/test_img1.png">-->
+          <img :src="item.img">
           <div class="bottom">
             <p v-text="item.title">对客户诚信不做伤害</p>
             <p class="time" v-text="item.creattime"></p>
@@ -203,14 +204,14 @@
   .notice-info {
     flex: 1;
     overflow: hidden;
-    margin-left: 14px;
+    margin-left: 24px;
   }
 
   .notice-info .text {
     width: 100%;
     display: inline-block;
     white-space: nowrap;
-    animation: 15s wordsLoop linear infinite;
+   /* animation: 15s wordsLoop linear infinite;*/
   }
 
   @keyframes wordsLoop {

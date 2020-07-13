@@ -17,13 +17,14 @@ export function selectOrder(data) {
     data
   })
 }
+/*套餐接口*/
 export function queryBankList() {
   return request({
     url: '/other/bankList',
     method: 'post'
   })
 }
-
+/*充值*/
 export function updateOrderApp(data) {
   let baseUrl='/web/updateOrderApp?'
   for(var i in data){
@@ -35,6 +36,13 @@ export function updateOrderApp(data) {
     data
   })
 }
+export function selectBank() {
+  return request({
+    url: '/other/selectBank',
+    method: 'post'
+  })
+}
+
 /*积分兑换说明*/
 export function queryAppSetup() {
   return request({

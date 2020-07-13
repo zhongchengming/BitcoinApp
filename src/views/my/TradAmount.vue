@@ -7,7 +7,7 @@
     </yd-navbar>
 
     <div class="container">
-      <p v-if='!myList.length' class="no-data">暂无数据</p>
+      <p v-if="noData" class="no-data">暂无数据</p>
       <ul v-else class="money-record">
         <li class="p-order-item" v-for="(item,index) in myList" :key="index">
           <div class="title row">
@@ -37,9 +37,28 @@
         name: "MoneyRecord",
         data() {
             return {
-                myList: this.$store.getters.userId,
+                myList:[],
+                noData:false
             }
         },
+        mounted() {
+            this.load()
+        },
+        methods:{
+            load() {
+                let params = {
+                    userid:this.$store.getters.userId,
+                }
+                queryCoin(params).then(res => {
+                    if (res.resultCode == 1) {
+                        this.myList = this.myList.concat(res.resultBody)
+                        if (this.myList.length === 0) {
+                            this.noData = true
+                        }
+                    }
+                })
+            }
+        }
     }
 </script>
 
@@ -58,11 +77,14 @@
   }
 
   .p-order-item {
-    padding: 10px 12px;
+    padding: 7px 15px;
     background: #fff;
     font-size: 13px;
     color: #333;
-    margin: 10px 0;
+    /*margin: 10px 0;*/
+  }
+  .p-order-item:not(:last-child){
+    border-bottom: 1px solid #f5f5f5;
   }
 
   .p-order-item .no {
