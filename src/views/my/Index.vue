@@ -24,13 +24,15 @@
       </li>
       <li>
         <div>
-          <p class="number" v-text="this.$store.getters.btbmoney?this.$store.getters.btbmoney:'0'">0</p>
+          <p class="number" v-text="this.$store.getters.balance?this.$store.getters.balance:'0'">0</p>
           <p>盘口余额</p>
         </div>
       </li>
       <li>
         <div>
-          <p class="number" v-text="this.$store.getters.endDay">2020.07.01</p>
+          <p class="number">
+            剩<span v-text="this.$store.getters.endDay?this.$store.getters.endDay:'0'"></span>天
+          </p>
           <p>到期时间</p>
         </div>
       </li>

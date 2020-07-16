@@ -1,36 +1,32 @@
 <template>
   <div class="page-home home-wrap">
     <div class="box-container" v-if="isBindText">
-      <!--v-if="isBindText"-->
       <p v-if="noData" class="no-data">暂无数据</p>
       <ul v-else class="money-record">
         <li class="p-order-item" v-for="(item,index) in myList" :key="index">
           <div class="title row">
             <p class="no">
-              <span class="name">盘口名称：</span>
-              <span v-text="item.btbname">202006292154067460</span>
+              <span class="name">脚本名称：</span>
+              <span v-text="item.transactionname">54067460</span>
             </p>
-            <span class="state">
-                   币种：{{item.coin}}
-              </span>
+            <span class="state">{{item.gradescore}}</span>
           </div>
           <div class="msg">
             <p>
-              <span class="name">额度：</span>
-              <span class="price">￥<i v-text="item.balance">1000</i></span>
+              <span class="name">脚本执行额度：</span>
+              <span class="price"><i v-text="item.money">1000</i>usdt</span>
             </p>
+            <van-count-down :time="time" />
+          </div>
+          <div class="bottom-btns">
+            <button @click="countdownBtn(item)">倒计时</button>
+            <button @click="startBtn(item)">启动</button>
           </div>
         </li>
       </ul>
     </div>
-    <div class="login-box">
-      <!--<div v-if="isBindText" class="bind-box">-->
-        <!--<div class="bind-text">
-          <yd-icon name="checkoff"></yd-icon>
-          <p>绑定成功</p>
-        </div>-->
-      <!--</div>-->
-      <div class="login-form" v-if="!isBindText">
+    <div class="login-box" v-else>
+      <div class="login-form" >
         <ul class="login-list">
           <li>
             <img class="icon" src="@/assets/images/icon_tel.png"/>
@@ -38,12 +34,13 @@
           </li>
           <li>
             <img class="icon" src="@/assets/images/icon_password.png"/>
-            <yd-input type="password" v-model="query.password" placeholder="请输入密码"></yd-input>
+            <yd-input type="password" v-model="query.jyspassword" placeholder="请输入交易密码"></yd-input>
           </li>
         </ul>
         <button class="login-btn" @click="bindBtn()">立即绑定</button>
       </div>
     </div>
+    <!--提示信息弹窗-->
     <yd-popup v-model="fitterPopup" position="center" width="50%">
       <div class="fitter-popup-box">
         <p class="list-item" v-for="(item,index) in lists">
@@ -71,64 +68,91 @@
 <script>
   import {mapGetters} from 'vuex'
   import {messagelist, saveOrUpdateCoin} from '@/api/common/user'
-  import {queryCoin} from '@/api/my'
+  import {queryTransaction,getIsBind,startOrStopTransaction} from '@/api/my'
 
   export default {
     name: "trade",
     data() {
       return {
-        isBindText:this.$store.getters.isbind,
-          myList:[],
-          noData:false,
+        time:4* 60 * 60 * 1000,
+        isBindText: false,
+        myList: [],
+        noData: false,
         query: {
           username: '',
-          password:''
+          jyspassword: ''
         },
         fitterPopup: false,
         lists: [],
-        item: "",
       }
     },
-    computed:{
-      ...mapGetters([
-        'isbind'
-      ])
-     /* getIsBindState(){
-        return this.$store.getters.isbind
-      }*/
-    },
+    computed: {},
     mounted() {
-        /*if(this.$store.getters.isbind){*/
-            this.amountLoad()
-        /*}*/
+      this.onLoad()
     },
     methods: {
-        amountLoad() {
-            let params = {
-                userid:this.$store.getters.userId,
+      onLoad() {
+        let params = {
+          userid: this.$store.getters.userId,
+        }
+        getIsBind(params).then(res => {
+          if (res.resultCode == 1) {
+            this.isBindText=res.resultBody.isbind
+            /*如果isbind为true执行脚本列表*/
+            if(this.isBindText){
+              this.queryScript()
             }
-            queryCoin(params).then(res => {
-                if (res.resultCode == 1) {
-                    this.myList = this.myList.concat(res.resultBody)
-                    if (this.myList.length === 0) {
-                        this.noData = true
-                    }
-                }
-            })
-        },
-      load() {
-        this.fitterPopup=true
-        messagelist().then(response => {
-          this.lists = response.resultBody
-          let setTime= setInterval(()=>{
-            this.fitterPopup = false
-            /*this.$store.dispatch('GetIsBind',true);*/
-            this.isBindText=true
-              this.amountLoad()
-          },3000)
-        /*  clearInterval(setTime)*/
+          }
         })
       },
+      /*查询脚本列表*/
+      queryScript() {
+        queryTransaction().then(res => {
+          if (res.resultCode == 1) {
+            this.myList = this.myList.concat(res.resultBody)
+            if (this.myList.length === 0) {
+              this.noData = true
+            }
+          }
+        })
+      },
+      /*倒计时按钮*/
+      countdownBtn(item){
+        let params = {
+          transactionid: item.id,
+          userid: this.$store.getters.userId,
+          id: ''
+        }
+        startOrStopTransaction(params).then(response => {
+          if (response.resultCode == 1) {
+            console.log('倒计时按钮')
+          }
+        })
+      },
+      /*启动按钮*/
+      startBtn(item){
+        let params = {
+          transactionid: item.id,
+          userid: this.$store.getters.userId,
+          id: ''
+        }
+        startOrStopTransaction(params).then(response => {
+          if (response.resultCode == 1) {
+            console.log('启动按钮')
+          }
+        })
+      },
+      queryMsgList() {
+        this.fitterPopup = true//显示提示弹窗
+        messagelist().then(response => {
+          this.lists = response.resultBody
+          setTimeout(() => {
+            this.onLoad()
+            this.fitterPopup = false
+          }, 1500)
+        })
+      },
+      /*绑定按钮*/
       bindBtn() {
         if (!this.query.username) {
           this.$dialog.toast({
@@ -136,21 +160,20 @@
           })
           return
         }
-          if (!this.query.password) {
-              this.$dialog.toast({
-                  mes: '请输入密码'
-              })
-              return
-          }
-        /*this.$dialog.loading.open('绑定中...');*/
+        if (!this.query.jyspassword) {
+          this.$dialog.toast({
+            mes: '请输入交易密码'
+          })
+          return
+        }
         let params = {
           username: this.query.username,
-          userid: this.$store.getters.userId
+          userid: this.$store.getters.userId,
+          jyspassword: this.query.jyspassword
         }
         saveOrUpdateCoin(params).then(response => {
-         /* this.$dialog.loading.close()*/
           if (response.resultCode == 1) {
-            this.load()
+            this.queryMsgList()
           }
         })
       }
@@ -161,15 +184,16 @@
 <style scoped>
   .home-wrap {
     min-height: 100%;
-    background: url("/static/images/bg_trade.png") no-repeat;
-    background-size: 100% 100%;
+    background: #0f1f0a;
     position: relative;
-    display: flex;
-    align-items: center;
     padding: 20px 0 60px;
     box-sizing: border-box;
   }
-.box-container{width: 100%;}
+
+  .box-container {
+    width: 100%;
+  }
+
   .no-data {
     color: #666;
     font-size: 20px;
@@ -184,12 +208,14 @@
   }
 
   .p-order-item {
-    padding: 7px 15px;
+    padding: 10px 15px;
     font-size: 13px;
-    color: #fff;
+    color: #999;
+    border-bottom: 1px dotted #444;
   }
-  .p-order-item:not(:last-child){
-    border-bottom: 1px solid #f5f5f5;
+
+  .p-order-item:not(:last-child) {
+    border-bottom: 1px dotted #444;
   }
 
   .p-order-item .no {
@@ -200,11 +226,7 @@
   .p-order-item .name {
     margin-right: 3px;
   }
-
-  .p-order-item .msg {
-    padding: 10px 5px;
-  }
-
+  .p-order-item .msg{margin-top: 7px}
   .p-order-item .msg p {
     margin-bottom: 5px;
   }
@@ -216,29 +238,25 @@
   .p-order-item .state {
     color: #37A6F5
   }
+  .bottom-btns{
+    text-align: right;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  .bottom-btns button{
+    border: 1px solid #eee;
+    border-radius: 4px;
+    color: #999;
+    font-size: 12px;
+    padding: 3px;
+    margin-left: 10px;
+  }
 
   .login-box {
     margin-top: 130px;
     height: 400px;
   }
-  /*.bind-box{
-    width: 120px;
-    height: 120px;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    text-align: center;
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .bind-text{
-    font-size: 14px;
-    color: #fff;
-  }
-  .bind-text .yd-icon-checkoff{
-    font-size: 30px!important;
-  }*/
+
   .fitter-popup-box {
     width: 100%;
     height: 150px;
@@ -248,11 +266,16 @@
     border-radius: 4px;
     text-align: center;
   }
-  .fitter-popup-box .list-item{margin-bottom: 3px;}
-  .fitter-popup-box .list-item:not(:first-child){
+
+  .fitter-popup-box .list-item {
+    margin-bottom: 3px;
+  }
+
+  /*.fitter-popup-box .list-item:not(:first-child) {
     visibility: hidden;
     animation: listAni 2s ease both;
-  }
+  }*/
+
   @keyframes listAni {
     0% {
       opacity: 0;
@@ -263,21 +286,27 @@
       visibility: visible;
     }
   }
+
   .list-item:nth-child(1) {
     animation-delay: 0s;
   }
+
   .list-item:nth-child(2) {
     animation-delay: 5s;
   }
+
   .list-item:nth-child(3) {
     animation-delay: 10s;
   }
+
   .list-item:nth-child(4) {
-    animation-delay:15s;
+    animation-delay: 15s;
   }
+
   .list-item:nth-child(5) {
     animation-delay: 20s;
   }
+
   .list-item:nth-child(6) {
     animation-delay: 25s;
   }

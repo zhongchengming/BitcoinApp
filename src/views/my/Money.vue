@@ -62,8 +62,8 @@
                  </button>-->
               </p>
               <p class="item-text">
-                <span class="bank-title">充值金额：</span>
-                <span class="bank-text" v-text="listBank.money" style="color:darkred;">1000</span>
+                <span class="bank-title">充值金额：￥</span>
+                <span class="bank-text" v-text="listBank.money?listBank.money:'0'"></span>
               </p>
             </div>
             <div class="wechat-box" v-if="item.type==='002'">

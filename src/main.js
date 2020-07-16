@@ -7,7 +7,9 @@ import router from './router'
 
 import YDUI from 'vue-ydui'
 import Vant from 'vant'
-import 'vant/lib/vant-css/index.css'
+import { CountDown } from 'vant';
+Vue.use(CountDown);
+/*import 'vant/lib/vant-css/index.css'*/
 import VueProgressBar from 'vue-progressbar'
 import VueMoment from 'vue-moment'
 import moment from 'moment'

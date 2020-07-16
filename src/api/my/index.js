@@ -138,3 +138,46 @@ export function queryCoin(data) {
     data
   })
 }
+/*交易账户金额接口换成这个*/
+export function getbtbCoin(data) {
+  let baseUrl='/user/getbtbCoin?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}
+/*查询是否已经绑定*/
+export function getIsBind(data) {
+  let baseUrl='/user/getIsBind?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}
+/*脚本列表*/
+export function queryTransaction() {
+  return request({
+    url: '/web/queryTransaction',
+    method: 'post'
+  })
+}
+/*开始或者停止执行*/
+export function startOrStopTransaction(data) {
+  let baseUrl='/web/startOrStopTransaction?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])+'&'
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

@@ -6,13 +6,13 @@ const user = {
     token: getToken(),
     /* token:'',*/
     userId: '',
-    username: '',
-    invitationcode: '',
-    integral: '',
+    username: '',//用户名
+    invitationcode: '',//邀请码
+    integral: '',//积分
     btbname: '',
     btbmoney: '',
     afendtime: '',
-    balance: '',//余额
+    balance: '',//盘口余额
     btbMoneyList: [],//日志记录
     endDay: '',//过期时间
     isbind:''//是否绑定

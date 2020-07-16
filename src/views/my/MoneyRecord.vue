@@ -28,19 +28,17 @@
                   <!--订单状态（0创建成功）（1已充值等待审核）（2充值失败）（3已充值已审核）（4审核不通过）-->
                 </div>
                 <div class="msg">
-                  <div class="row">
-                    <p>
-                      <span class="name">收 款 人：</span>
-                      <span v-text="item.username">小张</span>
-                    </p>
-                  </div>
-                  <p>
-                    <span class="name">收款银行：</span>
-                    <span v-text="item.bankcard">中国农业银行</span>
+                  <p v-if="item.type=='001'">
+                    <span class="name">收 款 人：</span>
+                    <span v-text="item.name">小张</span>
                   </p>
-                  <p>
+                  <p v-if="item.type=='001'">
+                    <span class="name">收款银行：</span>
+                    <span v-text="item.bankname">中国农业银行</span>
+                  </p>
+                  <p v-if="item.type=='001'">
                     <span class="name">收款账号：</span>
-                    <span v-text="item.cardnumber">6228480318401674276</span>
+                    <span v-text="item.bankcno">6228480318401674276</span>
                   </p>
                   <p>
                     <span class="name">充值时间：</span>
@@ -49,6 +47,10 @@
                   <p>
                     <span class="name">充值金额：</span>
                     <span class="price">￥<i v-text="item.money">1000</i></span>
+                  </p>
+                  <p v-if="item.type!='001'">
+                    <span class="name">支付方式：</span>
+                    <span v-text="item.type=='002'?'支付宝':'微信'">微信或者支付宝</span>
                   </p>
                 </div>
               </li>
