@@ -7,7 +7,7 @@
     </yd-navbar>
     <div class="container">
       <p v-if="noData" class="no-data">暂无数据</p>
-      <ul class="share-list">
+      <ul class="share-list" v-else>
         <li class="item" v-for="(item,index) in myList" :key="index">
           <div class="title">
             <h3>{{item.title}}</h3>
@@ -47,8 +47,11 @@
                 }
                 queryArticle(params).then(response => {
                     if (response.resultCode == 1) {
-                        console.log(response)
                         this.myList = response.resultBody
+                        // 如果没有数据，显示暂无数据
+                        if (this.myList.length === 0) {
+                            this.noData = true
+                        }
                     }
                 })
             }

@@ -66,7 +66,7 @@
       <ul class="culture-list">
         <li v-for="(item,index) in cultureLists" :key="index" @click="goDetail(item)">
           <!--<img src="@/assets/images/test_img1.png">-->
-          <img :src="item.img">
+          <img :src="item.img?item.img:'@/assets/images/none-pic.png'">
           <div class="bottom">
             <p v-text="item.title">对客户诚信不做伤害</p>
             <p class="time" v-text="item.creattime"></p>

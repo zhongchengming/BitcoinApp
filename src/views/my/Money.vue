@@ -1,9 +1,12 @@
 <template>
   <div class="page-about white">
     <yd-navbar title="充值" fixed>
-      <div @click="goback" slot="left">
+      <!--<div @click="goback" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
-      </div>
+      </div>-->
+      <router-link to="/" slot="left">
+        <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
+      </router-link>
     </yd-navbar>
     <div class="money-page">
       <ul class="package-list">
@@ -18,7 +21,7 @@
             <div class="title" @click="msgClose($index)">
               <div class="left" v-if="item.type==='001'">
                 <!--<img class="icon" slot="icon" src="@/assets/images/union-pay.svg">-->
-                <img class="icon" slot="icon" :src="item.img">
+                <img class="icon" slot="icon" :src="item.img?item.img:'@/assets/images/union-pay.svg'">
                 <span v-text="item.bankname">中国农业银行</span>
               </div>
               <div class="left" v-if="item.type==='002'"><!--支付宝-->
