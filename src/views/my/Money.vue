@@ -16,35 +16,38 @@
         </li>
       </ul>
       <ul class="money-list">
-        <li class="item" v-for="(item,$index) in cards" @click="showSeting">
-          <div @click="settingEvent($event)">
-            <div class="title" @click="msgClose($index)">
-              <div class="left" v-if="item.type==='001'">
-                <!--<img class="icon" slot="icon" src="@/assets/images/union-pay.svg">-->
-                <img class="icon" slot="icon" :src="item.img?item.img:'@/assets/images/union-pay.svg'">
-                <span v-text="item.bankname">中国农业银行</span>
-              </div>
-              <div class="left" v-if="item.type==='002'"><!--支付宝-->
-                <i slot="icon" class="icon iconfont iconzhifubaozhifu" style="font-size: 25px;color: #24a7ff;"></i>
-                <span v-text="item.bankname">中国农业银行</span>
-              </div>
-              <div class="left" v-if="item.type==='003'"><!--微信-->
-                <i slot="icon" class="icon iconfont iconweixinzhifu" style="font-size: 25px;color: green;"></i>
-                <span v-text="item.bankname">中国农业银行</span>
-              </div>
-              <i class="icon iconfont iconiconfontjiantou5 arrow"></i>
+        <li class="item" v-for="(item,index) in cards" :key="index">
+          <div class="title" @click="msgClose(index)">
+            <div class="left" v-if="item.type==='001'">
+              <!--<img class="icon" slot="icon" src="@/assets/images/union-pay.svg">-->
+              <img class="icon" slot="icon" :src="item.img?item.img:'@/assets/images/union-pay.svg'">
+              <span v-text="item.bankname">中国农业银行</span>
             </div>
+            <div class="left" v-if="item.type==='002'"><!--支付宝-->
+              <i slot="icon" class="icon iconfont iconzhifubaozhifu" style="font-size: 25px;color: #24a7ff;"></i>
+              <span v-text="item.bankname">中国农业银行</span>
+            </div>
+            <div class="left" v-if="item.type==='003'"><!--微信-->
+              <i slot="icon" class="icon iconfont iconweixinzhifu" style="font-size: 25px;color: green;"></i>
+              <span v-text="item.bankname">中国农业银行</span>
+            </div>
+            <i class="icon iconfont iconiconfontjiantou5 arrow"></i>
           </div>
-          <div v-show="$index==i" class="back-detail-box">
+          <div v-show="activeIndex===index" class="back-detail-box">
             <div v-if="item.type==='001'">
               <p class="item-text">
                 <span class="bank-title">收款银行：</span>
                 <span class="bank-text" v-text="item.bankname">
                 农业银行
               </span>
-                <!--<button class="copy-btn copy-cardname" :data-clipboard-text="listBank.bankname"
+                <!--https://blog.csdn.net/qq_41627870/article/details/88077165?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight-->
+                <!--:class="[isActive==index?'active':'otherActiveClass']"-->
+                <!--<button class="copy-btn" :class="[isActive==index?'active':'otherActiveClass']" :data-clipboard-text="item.bankname"
                         @click="copyText('bankname')">复制
                 </button>-->
+             <!-- <button class="copy-btn copy-cardname" :data-clipboard-text="item.bankname"
+                      @click="copyText('bankname')">复制
+              </button>-->
               </p>
               <p class="item-text">
                 <span class="bank-title">收款账号：</span>
@@ -107,16 +110,11 @@
                 w_bankid: '',//套餐id
                 lists: [],
                 checkIndex: '',
-
                 cards: [],
-                i: -1
+              activeIndex:-1
             }
         },
-        computed: {
-            resultNum() {
-                return this.num;
-            }
-        },
+        computed: {},
         mounted() {
             this.load()
         },
@@ -124,19 +122,8 @@
             goback() {
                 this.$router.go(-1)
             },
-            showSeting() {
-                this.i = -1
-            },
-            settingEvent(event) {
-                event.stopPropagation();
-            },
             msgClose(index) {
-                /*this.activeIndex = index;*/
-                if (this.i !== -1) {
-                    this.i = -1
-                } else {
-                    this.i = index
-                }
+              this.activeIndex = this.activeIndex == index ? !index : index
             },
             load() {
                 queryBankList().then(res => {
@@ -165,7 +152,7 @@
             moneyBtn(id) {
                 event.stopPropagation();
                 let params = {
-                    userid: this.$store.state.user.userId,
+                    userid: this.$store.getters.userId,
                     w_bankid: this.w_bankid,
                     w_bankidTwo:id
                 }
