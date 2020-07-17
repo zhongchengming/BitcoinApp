@@ -1,5 +1,6 @@
 <template>
   <div class="page-home home-wrap">
+    <!--脚本列表页面-->
     <div class="box-container no-show-box" :style="{display:isShowList}">
       <p v-if="noData" class="no-data">暂无数据</p>
       <ul v-else class="money-record">
@@ -44,6 +45,7 @@
         </li>
       </ul>
     </div>
+    <!--绑定表单页面-->
     <div class="login-box no-show-box" :style="{display:isShowForm}">
       <div class="login-form" >
         <ul class="login-list">
