@@ -16,28 +16,30 @@
               <span class="name">脚本执行额度：</span>
               <span class="price"><i v-text="item.money">1000</i>usdt</span>
             </p>
-           <!-- <p>
-              <span class="name">脚本执行时长：</span>
-              <span v-text="item.transactiontime"></span>
-            </p>-->
           </div>
           <div class="bottom-btns">
-            <!--<p class="countTime"> <span class="name">倒计时：</span>
-             &lt;!&ndash; <van-count-down :time="time" />&ndash;&gt;
-             &lt;!&ndash; <van-count-down
+            <yd-button type="primary" @click.native="startBtn(item)" :disabled="item.status=='0'?true:false">
+              {{item.status=='0'?'启动中':'启动'}}
+            </yd-button>
+            <yd-button type="hollow" class="time-btn" v-show="item.isShowScript">
+              执行时长：
+              <!--<span v-text="item.transactiontime"></span>-->
+              <span>{{item.transactiontime|dateTimeFilter}}</span>
+            </yd-button>
+            <div class="cuntdown-btn" v-show="!item.isShowScript">
+              <!--<van-count-down
                 ref="countDownTime"
                 :time="time"
-                :auto-start="false" />&ndash;&gt;
+                :auto-start="item.transactiontime==0&&item.existStart==true?false:true"
+                @finish="countDownFinish"
+              />-->
               <van-count-down
                 ref="countDownTime"
-                :time="time"
-                :auto-start="startFalse"
-                @finish="countDownFinish"
+                :time="item.msTime"
+                :auto-start="item.isStartup?item.isStartup:false"
+                @finish="countDownFinish(item)"
               />
-            </p>-->
-            <yd-button type="primary" @click.native="startBtn(item)" :disabled="item.disable">启动</yd-button>
-            <yd-button type="hollow" class="time-btn">执行时长：<span v-text="item.transactiontime"></span>h</yd-button>
-          <!--  <yd-button type="primary" @click="startBtn(item)" disabled>启动</yd-button>-->
+            </div>
           </div>
         </li>
       </ul>
@@ -107,6 +109,22 @@
       }
     },
     computed: {},
+    filters: { //时间过滤器
+        'dateTimeFilter': function (dateTime){
+            var dateTimeData="";
+            var h = Math.floor(dateTime / 60);
+            dateTime -= h * 60;
+            if (dateTime == 0) {
+                dateTimeData = h ? h + "小时" : "";
+            } else {
+                if (dateTime < 10) {
+                    dateTime = "0" + dateTime;
+                }
+                dateTimeData =  (h ? h + "小时" : "") + (dateTime ? dateTime + "分" : "");
+            }
+            return dateTimeData;
+        }
+    },
     mounted() {
       this.onLoad()
     },
@@ -135,41 +153,53 @@
         queryTransaction().then(res => {
           if (res.resultCode == 1) {
             this.myList = this.myList.concat(res.resultBody)
+            for (var i=0;i<this.myList.length;i++) {
+                this.myList[i].msTime=this.myList[i].transactiontime*60*1000
+                //判断一进入页面是否启动倒计时
+                this.myList[i].isStartup=this.myList[i].status==0?true:false
+                /*是否显示脚本时长div*/
+                this.myList[i].isShowScript=this.myList[i].status==0?false:true
+            }
             if (this.myList.length === 0) {
               this.noData = true
             }
           }
         })
       },
-      /*倒计时按钮*/
-      /*countdownBtn(item){
-        let params = {
-          transactionid: item.id,
-          userid: this.$store.getters.userId,
-          id: ''
-        }
-        startOrStopTransaction(params).then(response => {
-          if (response.resultCode == 1) {
-            console.log('倒计时按钮')
-          }
-        })
-      },*/
       /*启动按钮*/
       startBtn(item){
-        /*this.$refs.countDownTime.start();*/
-          this.startFalse=true
         let params = {
           transactionid: item.id,
           userid: this.$store.getters.userId,
         }
-        startOrStopTransaction(params).then(response => {
-          if (response.resultCode == 1) {
-            console.log('启动按钮')
-          }
-        })
+        if(!item.existStart){
+            startOrStopTransaction(params).then(res => {
+                if(res.resultCode == 1) {
+                    this.queryScript()
+                    let startId=res.resultBody.id
+                    if(item.transactiontime==0){
+                        this.stopCountdown(item,startId)
+                    }
+                }
+            })
+        }else{
+            this.$dialog.toast({mes: '只能启动一个任务,不能进行多个！', timeout: 1000});
+        }
       },
-      countDownFinish(){
-
+      /*停止倒计时*/
+      stopCountdown(item,startId){
+          let params = {
+              transactionid: item.id,
+              userid: this.$store.getters.userId,
+              id: startId
+          }
+          startOrStopTransaction(params).then(response => {
+              if (response.resultCode == 1) {}
+          })
+      },
+        /*倒计时完成调用*/
+      countDownFinish(item){
+          this.stopCountdown(item)
       },
       queryMsgList() {
         this.fitterPopup = true//显示提示弹窗
@@ -276,13 +306,15 @@
     align-items: center;
   }
   .bottom-btns .time-btn{border: 1px solid #ddd;color: #333;}
-  .bottom-btns .countTime{display: flex;align-items: center;font-size: 12px;color: #999;}
-  .bottom-btns .countTime .name{
-    display: block;
-    line-height: 17px;
-    font-size: 12px;
+  .bottom-btns .cuntdown-btn{
+    height: 27px;
+    line-height: 27px;
+    padding: 0 7px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #ddd;
   }
-  .bottom-btns .countTime .van-count-down{color: #999;}
+  .bottom-btns .cuntdown-btn .van-count-down{color: #333;line-height: 27px;}
   .bottom-btns button{
     border: 1px solid #eee;
     border-radius: 4px;
