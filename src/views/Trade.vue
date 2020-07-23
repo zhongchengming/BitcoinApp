@@ -64,8 +64,9 @@
     <!--提示信息弹窗-->
     <yd-popup v-model="fitterPopup" position="center" width="50%">
       <div class="fitter-popup-box">
-        <p class="list-item" v-for="(item,index) in lists">
-          {{item}}
+        <p class="list-item" v-for="(item,index) in msgList" v-show="item.id==current?item.isShow:item.id==0?true:item.isShow">
+          <!--v-show="index==current"-->
+          {{item.name}}
         </p>
       </div>
     </yd-popup>
@@ -107,7 +108,8 @@
           jyspassword: ''
         },
         fitterPopup: false,
-        lists: [],
+        msgList: [],
+        current:0,
       }
     },
     computed: {},
@@ -177,6 +179,7 @@
         if(!item.existStart){
             startOrStopTransaction(params).then(res => {
                 if(res.resultCode == 1) {
+                    this.myList=[]//清空myList数据，要不然会导致冗余数据
                     this.queryScript()
                     let startId=res.resultBody.id
                     if(item.transactiontime==0){
@@ -203,16 +206,6 @@
       countDownFinish(item){
           this.stopCountdown(item)
       },
-      queryMsgList() {
-        this.fitterPopup = true//显示提示弹窗
-        messagelist().then(response => {
-          this.lists = response.resultBody
-          setTimeout(() => {
-            this.onLoad()
-            this.fitterPopup = false
-          }, 1500)
-        })
-      },
       /*绑定按钮*/
       bindBtn() {
         if (!this.query.username) {
@@ -236,6 +229,61 @@
           if (response.resultCode == 1) {
             this.queryMsgList()
           }
+        })
+      },
+      /*展示信息*/
+      queryMsgList() {
+        this.fitterPopup = true//显示提示弹窗
+        messagelist().then(response => {
+          if(response.resultBody.length!=0){
+            for(let i=0;i<response.resultBody.length;i++){
+              this.msgList.push({
+                id:i,
+                isShow:false,
+                name:response.resultBody[i]
+              })
+            }
+            this.msgList[0].isShow=true
+          }
+          console.log(this.msgList)
+          let setTimer=setInterval(() => {
+            this.current++
+            if(this.current==1){
+              this.msgList[0].isShow=true
+              this.msgList[1].isShow=true
+            }
+            if(this.current==2){
+              this.msgList[0].isShow=true
+              this.msgList[1].isShow=true
+              this.msgList[2].isShow=true
+            }
+            if(this.current==3){
+              this.msgList[0].isShow=true
+              this.msgList[1].isShow=true
+              this.msgList[2].isShow=true
+              this.msgList[3].isShow=true
+            }
+            if(this.current==4){
+              this.msgList[0].isShow=true
+              this.msgList[1].isShow=true
+              this.msgList[2].isShow=true
+              this.msgList[3].isShow=true
+              this.msgList[4].isShow=true
+            }
+            if(this.current==5){
+              this.msgList[0].isShow=true
+              this.msgList[1].isShow=true
+              this.msgList[2].isShow=true
+              this.msgList[3].isShow=true
+              this.msgList[4].isShow=true
+              this.msgList[5].isShow=true
+            }
+            if(this.current>5){
+              this.onLoad()
+              this.fitterPopup = false
+              clearInterval(setTimer)
+            }
+          }, 600)
         })
       }
     }
