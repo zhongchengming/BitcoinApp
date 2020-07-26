@@ -53,3 +53,16 @@ export function queryArticleDeatil(data) {
     data
   })
 }
+
+/*获取验证码*/
+export function getSendCode(data) {
+  let baseUrl='/user/sendCode?'
+  for(var i in data){
+    baseUrl +=i+'='+encodeURIComponent(data[i])
+  }
+  return request({
+    url: baseUrl,
+    method: 'post',
+    data
+  })
+}

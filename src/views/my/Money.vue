@@ -1,13 +1,13 @@
 <template>
-  <div class="page-about white">
-    <yd-navbar title="充值" fixed>
-      <!--<div @click="goback" slot="left">
+  <div class="bottom-distance white">
+    <!--<yd-navbar title="充值" fixed>
+      &lt;!&ndash;<div @click="goback" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
-      </div>-->
+      </div>&ndash;&gt;
       <router-link to="/" slot="left">
         <yd-navbar-back-icon color="#fff"></yd-navbar-back-icon>
       </router-link>
-    </yd-navbar>
+    </yd-navbar>-->
     <div class="money-page">
       <ul class="package-list">
         <li v-for="(item,index) in lists" @click="goDetail(item,index)" :class="{active:checkIndex == index}">
@@ -95,6 +95,20 @@
         </li>
       </ul>
     </div>
+    <yd-tabbar fixed active-color="#56b3f6">
+      <yd-tabbar-item title="首页" link="/" >
+        <yd-icon name="home" slot="icon" size="1.5rem"></yd-icon>
+      </yd-tabbar-item>
+      <yd-tabbar-item title="购买" active link="">
+        <yd-icon name="shopcart" slot="icon" size="1.5rem"></yd-icon>
+      </yd-tabbar-item>
+      <yd-tabbar-item title="账户" link="/my">
+        <yd-icon name="ucenter-outline" slot="icon" size="1.5rem"></yd-icon>
+      </yd-tabbar-item>
+      <yd-tabbar-item title="交易" link="/trade">
+        <yd-icon name="discount" slot="icon" size="1.5rem"></yd-icon>
+      </yd-tabbar-item>
+    </yd-tabbar>
   </div>
 </template>
 <script>
@@ -198,12 +212,18 @@
 </script>
 
 <style scoped>
-  .page-about {
+ /* .page-about {
     height: 100%;
     background: url("/static/images/bg_money.png") no-repeat;
     background-size: 100% 100%;
     box-sizing: border-box;
-  }
+  }*/
+ .bottom-distance{
+   min-height: 100%;
+   background: url("/static/images/bg_money.png") no-repeat;
+   background-size:100% 100%;
+   box-sizing: border-box;
+ }
 
   .money-page {
     padding: 20px;
