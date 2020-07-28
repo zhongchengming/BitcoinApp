@@ -40,8 +40,6 @@
                 <span class="bank-text" v-text="item.bankname">
                 农业银行
               </span>
-                <!--https://blog.csdn.net/qq_41627870/article/details/88077165?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight-->
-                <!--:class="[isActive==index?'active':'otherActiveClass']"-->
                 <!--<button class="copy-btn" :class="[isActive==index?'active':'otherActiveClass']" :data-clipboard-text="item.bankname"
                         @click="copyText('bankname')">复制
                 </button>-->
