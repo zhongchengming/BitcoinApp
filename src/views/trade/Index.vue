@@ -87,6 +87,7 @@
     height: 85px;
     background: #444;
     border-radius: 6px;
+    margin-bottom: 10px;
   }
   .trade-list .item .pic{
     position: absolute;
